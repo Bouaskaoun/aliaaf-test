@@ -18,9 +18,14 @@
     color: rgba(255, 255, 255, 0.735);
 }
 
+.form__group input {
+    width: 100%;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 8px 20px;
+}
+
 .auth__form input[type='file'] {
     color: #fff;
     cursor: pointer;
 }
-
-

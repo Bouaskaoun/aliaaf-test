@@ -7,7 +7,6 @@
     color: #fff;
 }
 
-
 .filter__widget select:focus {
     outline: none !important;
 }

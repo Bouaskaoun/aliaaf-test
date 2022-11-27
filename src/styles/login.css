@@ -5,6 +5,13 @@
 }
 
 .auth__btn {
+    border: none;
+    outline: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 40px;
     background: #fff;
     color: var(--primary-color);
     font-weight: 600;
@@ -16,13 +23,6 @@
 
 .auth__form p a {
     color: rgba(255, 255, 255, 0.735);
-}
-
-.form__group input {
-    width: 100%;
-    border: 1px solid var(--primary-color);
-    border-radius: 5px;
-    padding: 8px 20px;
 }
 
 .auth__form input[type='file'] {

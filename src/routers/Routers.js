@@ -5,6 +5,7 @@ import Login from '../pages/Login'
 import ProductDetails from '../pages/ProductDetails'
 import Shop from '../pages/Shop'
 import Signup from '../pages/Signup'
+import ProtectedRoute from './ProtectedRoute'
 
 const Routers = () => {
   return (
@@ -14,7 +15,14 @@ const Routers = () => {
       <Route path='login' element={<Login />}/>
       <Route path='addProducts' element={<AddProducts />}/>
       <Route path='shop/:id' element={<ProductDetails />}/>
-      <Route path='shop' element={<Shop />}/>
+      <Route 
+        path='shop' 
+        element={
+          <ProtectedRoute>
+            <Shop />
+          </ProtectedRoute>
+        }
+      />
       <Route path='signup' element={<Signup />}/>
     </Routes>
   )

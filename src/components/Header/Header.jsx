@@ -35,16 +35,6 @@ const Header = () => {
   const menuRef = useRef(null)
   const profileActionRef = useRef(null)
 
-  const logout = () => {
-    signOut(auth).then(() => {
-      toast.success('Logged out')
-      navigate('/home')
-    }).catch(err => {
-      toast.error(err.message)
-    })
-
-  }
-
   const stickyHeaderFunc = ()=>{
     window.addEventListener('scroll', ()=>{
       if(document.body.scrollTop > 80 || document.documentElement.scrollTop > 80){
@@ -55,7 +45,18 @@ const Header = () => {
     });
   };
 
+  const logout = () => {
+    signOut(auth).then(() => {
+      toast.success('Logged out')
+      navigate('/home')
+    }).catch(err => {
+      toast.error(err.message)
+    })
+
+  }
+
   useEffect(()=>{
+    console.log(currentUser)
     stickyHeaderFunc();
     return ()=> window.removeEventListener('scroll', stickyHeaderFunc)
   });
@@ -97,6 +98,7 @@ const Header = () => {
                   whileTap={{ scale: 1.2 }} 
                   src={userIcon} 
                   alt='' 
+                  onClick={toggleProfileActions}
                 />
                 <div 
                   className="profile__actions hide__profileActions" 
@@ -117,7 +119,7 @@ const Header = () => {
               </div>
               <div className="mobile__menu">
                 <span onClick={menuToggle}>
-                  <i className='ri-menu-line'></i>
+                  <i className="ri-menu-line"></i>
                 </span>
               </div>
             </div>

@@ -9,7 +9,7 @@ import '../styles/home.css';
 
 import { Container, Row, Col } from 'reactstrap';
 import { collection, getDocs } from "firebase/firestore";
-import { db } from '../firbase.config';
+import { db } from '../firebase.config';
 
 import heroImg from '../assets/images/hero-img.png';
 

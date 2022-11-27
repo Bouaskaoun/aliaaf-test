@@ -4,8 +4,8 @@ import Helmet from '../components/Helmet/Helmet';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { setDoc, doc } from 'firebase/firestore';
 
-import { db } from '../firbase.config';
-import { storage } from '../firbase.config';
+import { db } from '../firebase.config';
+import { storage } from '../firebase.config';
 
 
 import { toast } from 'react-toastify';

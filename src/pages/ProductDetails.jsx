@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Container, Row, Col } from 'reactstrap';
 import { useParams } from 'react-router-dom';
 import {motion} from 'framer-motion';
 import { collection, getDocs } from "firebase/firestore";
-import { db } from '../firbase.config';
+import { db } from '../firebase.config';
 
 import Helmet from '../components/Helmet/Helmet';
 import CommonSection from '../components/UI/CommonSection';

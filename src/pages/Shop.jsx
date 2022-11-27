@@ -4,7 +4,7 @@ import CommonSection from '../components/UI/CommonSection';
 import Helmet from '../components/Helmet/Helmet';
 import { Container, Row, Col } from 'reactstrap';
 import { collection, getDocs } from "firebase/firestore";
-import { db } from '../firbase.config';
+import { db } from '../firebase.config';
 
 import '../styles/shop.css';
 import ProductsList from '../components/UI/ProductsList';
@@ -107,7 +107,7 @@ const Shop = () => {
               <div className="search__box">
                 <input type="text" placeholder='Search...' onChange={handleSearch} />
                 <span>
-                  <i class="ri-search-line"></i>
+                  <i className="ri-search-line"></i>
                 </span>
               </div>
             </Col>

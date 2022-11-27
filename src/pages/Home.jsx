@@ -8,8 +8,10 @@ import Helmet from '../components/Helmet/Helmet';
 import '../styles/home.css';
 
 import { Container, Row, Col } from 'reactstrap';
+import { collection, getDocs } from "firebase/firestore";
+import { db } from '../firbase.config';
+
 import heroImg from '../assets/images/hero-img.png';
-import products from '../assets/data/products';
 
 const Home = () => {
 
@@ -19,6 +21,22 @@ const Home = () => {
   const [wirelessProducts, setWirelessProducts] = useState([])
   const [popularProducts, setPopularProducts] = useState([])
   const year = new Date().getFullYear();
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    async function fetchProducts() {
+        const data = []
+        const querySnapshot = await getDocs(collection(db, "products"));
+        querySnapshot.forEach((doc) => {
+            console.log(doc.id, " => ", doc.data());
+            data.push(doc.data());
+        });
+
+        setProducts(data);
+    }
+
+    fetchProducts();
+  }, []);
 
   useEffect(()=>{
     const filterdTrendingProducts = products.filter(
@@ -41,7 +59,7 @@ const Home = () => {
     setMobileProducts(filterdMobileProducts)
     setWirelessProducts(filterdWirelessProducts)
     setPopularProducts(filterdPopularProducts)
-  }, []);
+  }, [products]);
 
   return (
     <Helmet title={'Home'}>

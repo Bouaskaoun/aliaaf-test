@@ -16,12 +16,18 @@ const AddProducts = () => {
   const [productName, setProductName] = useState('')
   const [category, setCategory] = useState('')
   const [price, setPrice] = useState('')
-  const [file, setFile] = useState('null')
+  const [shortDesc, setShortDesc] = useState('')
+  const [avgRating, setAvgRating] = useState('')
+  const [description, setDescription] = useState('')
+  const [imgFile, setImgFile] = useState(null)
+  const [pdfFile, setPdfFile] = useState(null)
 
   const addProduct = async(e) => {
     e.preventDefault()
-    const storageRef = ref(storage, `files/${file.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
+    const storageRef = ref(storage, `imgFiles/${imgFile.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, imgFile);
+    const storagePdfRef = ref(storage, `pdfFiles/${pdfFile.name}`);
+    const uploadTaskPdf = uploadBytesResumable(storagePdfRef, pdfFile);
 
     uploadTask.on("state_changed",
       (snapshot) => {},
@@ -31,18 +37,23 @@ const AddProducts = () => {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
           const randomId = Math.random().toString(36).substring(2, 15)
-          await setDoc(doc(db,'products',randomId),{
+          setDoc(doc(db,'products',randomId),{
             id: randomId,
-            productName,
-            category,
-            price,
+            productName: productName,
+            category: category,
+            price: price,
+            shortDesc: shortDesc,
+            avgRating: avgRating,
+            description: description,
             imgUrl: downloadURL,
+            pdf: await getDownloadURL(uploadTaskPdf.snapshot.ref),
           })
         });
       }
     );
     toast.success('Object Created')
   }
+
 
   return (
     <Helmet title='AddProduct'>
@@ -78,8 +89,40 @@ const AddProducts = () => {
                 </FormGroup>
                 <FormGroup className='form__group'>
                     <input 
+                    type='text' 
+                    placeholder='ShortDesc'
+                    value={shortDesc}
+                    onChange={e => setShortDesc(e.target.value)} 
+                    />
+                </FormGroup>
+                <FormGroup className='form__group'>
+                    <input 
+                    type='number' 
+                    placeholder='avgRating'
+                    value={avgRating}
+                    onChange={e => setAvgRating(e.target.value)} 
+                    />
+                </FormGroup>
+                <FormGroup className='form__group'>
+                    <input 
+                    type='text' 
+                    placeholder='description'
+                    value={description}
+                    onChange={e => setDescription(e.target.value)} 
+                    />
+                </FormGroup>
+                <FormGroup className='form__group'>
+                    <input 
                     type='file'
-                    onChange={e => setFile(e.target.files[0])} 
+                    accept="image/png, image/jpeg"
+                    onChange={e => setImgFile(e.target.files[0])} 
+                    />
+                </FormGroup>
+                <FormGroup className='form__group'>
+                    <input 
+                    type='file'
+                    accept=".pdf"
+                    onChange={e => setPdfFile(e.target.files[0])} 
                     />
                 </FormGroup>
                 <button type='submit' className='buy__btn auth__btn'>Create a Product</button>

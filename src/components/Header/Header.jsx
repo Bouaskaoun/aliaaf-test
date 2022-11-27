@@ -1,11 +1,16 @@
 import React, {useRef, useEffect} from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate, Link } from 'react-router-dom';
 import {motion} from 'framer-motion'
 import { Container, Row } from 'reactstrap';
+import useAuth from '../../custom-hooks/useAuth';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase.config';
+
 
 import './header.css';
 import logo from '../../assets/images/eco-logo.png'
 import userIcon from '../../assets/images/user-icon.png'
+import { toast } from 'react-toastify';
 
 const nav__links = [
   {
@@ -24,8 +29,21 @@ const nav__links = [
 
 const Header = () => {
 
+  const {currentUser} = useAuth()
+  const navigate = useNavigate()
   const headerRef = useRef(null)
   const menuRef = useRef(null)
+  const profileActionRef = useRef(null)
+
+  const logout = () => {
+    signOut(auth).then(() => {
+      toast.success('Logged out')
+      navigate('/home')
+    }).catch(err => {
+      toast.error(err.message)
+    })
+
+  }
 
   const stickyHeaderFunc = ()=>{
     window.addEventListener('scroll', ()=>{
@@ -43,6 +61,8 @@ const Header = () => {
   });
 
   const menuToggle = ()=> menuRef.current.classList.toggle('active__menu')
+
+  const toggleProfileActions = ()=> profileActionRef.current.classList.toggle('show__profileActions')
 
   return (
     <header className="header" ref={headerRef}>
@@ -78,6 +98,22 @@ const Header = () => {
                   src={userIcon} 
                   alt='' 
                 />
+                <div 
+                  className="profile__actions hide__profileActions" 
+                  ref={profileActionRef}
+                  onClick={toggleProfileActions}
+                >
+                  {
+                    currentUser ? (
+                      <span onClick={logout}>Logout</span>
+                    ) : (
+                      <div className='d-flex align-items-center justify-content-center flex-column'>
+                        <Link to='/signup'>Signup</Link>
+                        <Link to='/login'>Login</Link>
+                      </div>
+                    )
+                  }
+                </div>
               </div>
               <div className="mobile__menu">
                 <span onClick={menuToggle}>

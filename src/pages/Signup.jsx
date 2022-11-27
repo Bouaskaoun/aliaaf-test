@@ -33,11 +33,6 @@ const Signup = () => {
                   placeholder='Enter your password' 
                 />
               </FormGroup>
-              <FormGroup className='form__group'>
-                <input 
-                  type='file'
-                />
-              </FormGroup>
               <button type='submit' className='buy__btn auth__btn'>Create an Account</button>
               <p>Already have an account? <Link to='/login'>Login</Link></p>
             </Form>

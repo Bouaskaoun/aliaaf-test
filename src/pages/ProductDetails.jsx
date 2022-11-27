@@ -38,9 +38,9 @@ const ProductDetails = () => {
   
   const relatedProducts = products.filter(item => item.category === product?.category)
 
-  const addToCart = () => {
-    toast.success('Product added successfully')
-  }
+  const openInNewTab = url => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -76,6 +76,7 @@ const ProductDetails = () => {
                 <motion.button 
                   whileTap={{ scale: 1.2 }}
                   className='buy__btn'
+                  onClick={() => openInNewTab(product?.pdf)}
                 >
                   Add to Cart
                 </motion.button>

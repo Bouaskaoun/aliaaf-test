@@ -5,6 +5,7 @@ import Login from '../pages/Login'
 import ProductDetails from '../pages/ProductDetails'
 import Shop from '../pages/Shop'
 import Signup from '../pages/Signup'
+import UsersList from '../pages/UsersList'
 import ProtectedRoute from './ProtectedRoute'
 
 const Routers = () => {
@@ -24,6 +25,7 @@ const Routers = () => {
         }
       />
       <Route path='signup' element={<Signup />}/>
+      <Route path='users' element={<UsersList />}/>
     </Routes>
   )
 }

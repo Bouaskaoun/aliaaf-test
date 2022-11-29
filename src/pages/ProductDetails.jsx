@@ -78,7 +78,7 @@ const ProductDetails = () => {
                   className='buy__btn'
                   onClick={() => openInNewTab(product?.pdf)}
                 >
-                  Add to Cart
+                  Download
                 </motion.button>
               </div>
             </Col>

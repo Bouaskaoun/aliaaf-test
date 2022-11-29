@@ -72,7 +72,7 @@ const Header = () => {
             <div className="logo">
               <img src={logo} alt='logo' />
               <div>
-                <h1>Multimart</h1>
+                <h1>Aliaaf</h1>
               </div>
             </div>
             <div className="navigation" ref={menuRef} onClick={menuToggle}>

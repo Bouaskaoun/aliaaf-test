@@ -125,7 +125,7 @@ const AddProducts = () => {
                     onChange={e => setPdfFile(e.target.files[0])} 
                     />
                 </FormGroup>
-                <button type='submit' className='buy__btn auth__btn'>Create a Product</button>
+                <button type='submit' className='auth__btn'>Create a Product</button>
                 </Form>
             </Col>
           </Row>

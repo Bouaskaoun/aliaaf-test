@@ -11,7 +11,7 @@ import { Container, Row, Col } from 'reactstrap';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from '../firebase.config';
 
-import heroImg from '../assets/images/hero-img.png';
+import heroImg from '../assets/images/ALIAAF_LOGO_575x434.png';
 
 const Home = () => {
 
@@ -72,7 +72,7 @@ const Home = () => {
                 <h2>Make Your Interior More Minimalistic & Modern</h2>
                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere ducimus illo optio voluptas laudantium harum sit blanditiis! Corporis, obcaecati quaerat?</p>
                 <motion.button whileTap={{ scale: 1.2 }} className='buy__btn'>
-                  <Link to='/shop'>SHOP NOW</Link>
+                  <Link to='/shop'>BOOKS</Link>
                 </motion.button>
               </div>
             </Col>
@@ -89,7 +89,7 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg='12' className='text-center mb-5'>
-              <h2 className='section__title'>Trending Products</h2>
+              <h2 className='section__title'>Products</h2>
             </Col>
             <ProductsList data={trendingProducts}/>
           </Row>
@@ -99,7 +99,7 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg='12' className='text-center mb-5'>
-              <h2 className='section__title'>Best Sales</h2>
+              <h2 className='section__title'>Category 1</h2>
             </Col>
             <ProductsList data={bestSalesProducts}/>
           </Row>
@@ -109,7 +109,7 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg='12' className='text-center mb-5'>
-              <h2 className='section__title'>New Arrivals</h2>
+              <h2 className='section__title'>Category 2</h2>
             </Col>
             <ProductsList data={mobileProducts} />
             <ProductsList data={wirelessProducts} />

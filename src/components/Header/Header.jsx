@@ -8,7 +8,7 @@ import { auth } from '../../firebase.config';
 
 
 import './header.css';
-import logo from '../../assets/images/eco-logo.png'
+import logo from '../../assets/images/ALIAAF LOGO v1.png'
 import userIcon from '../../assets/images/user-icon.png'
 import { toast } from 'react-toastify';
 
@@ -19,11 +19,19 @@ const nav__links = [
   },
   {
     path:'shop',
-    display:'Shop'
+    display:'Books'
   },
   {
     path:'login',
     display:'Login'
+  },
+  {
+    path:'addProducts',
+    display:'AddProducts'
+  },
+  {
+    path:'signup',
+    display:'Signup'
   }
 ]
 
@@ -72,7 +80,7 @@ const Header = () => {
             <div className="logo">
               <img src={logo} alt='logo' />
               <div>
-                <h1>Aliaaf</h1>
+                <h1 className='text-success'>Aliaaf</h1>
               </div>
             </div>
             <div className="navigation" ref={menuRef} onClick={menuToggle}>

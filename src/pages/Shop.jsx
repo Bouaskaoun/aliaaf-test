@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react';
 import CommonSection from '../components/UI/CommonSection';
 import Helmet from '../components/Helmet/Helmet';
 import { Container, Row, Col } from 'reactstrap';
-import { collection, getDocs } from "firebase/firestore";
-import { db } from '../firebase.config';
+import axios from 'axios';
 
 import '../styles/shop.css';
 import ProductsList from '../components/UI/ProductsList';
@@ -15,50 +14,45 @@ const Shop = () => {
   const [productsData, setProductsData] = useState([])
 
   useEffect(() => {
-    async function fetchProducts() {
-        const data = []
-        const querySnapshot = await getDocs(collection(db, "products"));
-        querySnapshot.forEach((doc) => {
-            console.log(doc.id, " => ", doc.data());
-            data.push(doc.data());
-        });
-
-        setProducts(data);
-        setProductsData(data);
-    }
-
-    fetchProducts();
+    const getProducts = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/products");
+        setProducts(res.data);
+        setProductsData(res.data);
+      } catch (err) {}
+    };
+    getProducts();
   }, []);
 
   const handleFilter = (e) => {
     const filterValue = e.target.value 
-    if(filterValue === 'sofa'){
+    if(filterValue === 'cat-1'){
       const filtredProducts = products.filter(
-        item => item.category === 'sofa'
+        item => item.category === 'cat-1'
       );
       setProductsData(filtredProducts)
     }
-    if(filterValue === 'chair'){
+    if(filterValue === 'cat-2'){
       const filtredProducts = products.filter(
-        item => item.category === 'chair'
+        item => item.category === 'cat-2'
       );
       setProductsData(filtredProducts)
     }
-    if(filterValue === 'watch'){
+    if(filterValue === 'cat-3'){
       const filtredProducts = products.filter(
-        item => item.category === 'watch'
+        item => item.category === 'cat-3'
       );
       setProductsData(filtredProducts)
     }
-    if(filterValue === 'mobile'){
+    if(filterValue === 'cat-4'){
       const filtredProducts = products.filter(
-        item => item.category === 'mobile'
+        item => item.category === 'cat-4'
       );
       setProductsData(filtredProducts)
     }
-    if(filterValue === 'wireless'){
+    if(filterValue === 'cat-4'){
       const filtredProducts = products.filter(
-        item => item.category === 'wireless'
+        item => item.category === 'cat-4'
       );
       setProductsData(filtredProducts)
     }
@@ -70,7 +64,7 @@ const Shop = () => {
   const handleSearch = (e) => {
     const searchTerm = e.target.value
 
-    const searchProducts = products.filter(item => item.productName?.toLowerCase().includes(searchTerm.toLowerCase()))
+    const searchProducts = products.filter(item => item.title?.toLowerCase().includes(searchTerm.toLowerCase()))
 
     setProductsData(searchProducts)
   }
@@ -86,11 +80,11 @@ const Shop = () => {
               <div className="filter__widget">
                 <select onChange={handleFilter}>
                   <option value="reset">Filter By Category</option>
-                  <option value="sofa">Sofa</option>
-                  <option value="mobile">Mobile</option>
-                  <option value="chair">Chair</option>
-                  <option value="watch">Watch</option>
-                  <option value="wireless">Wireless</option>
+                  <option value="cat-1">cat-1</option>
+                  <option value="cat-2">cat-2</option>
+                  <option value="cat-3">cat-3</option>
+                  <option value="cat-4">cat-4</option>
+                  <option value="cat-4">cat-4</option>
                 </select>
               </div>
             </Col>

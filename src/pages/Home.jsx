@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import {motion} from 'framer-motion'
+import {motion} from 'framer-motion';
+import axios from 'axios';
 
 import ProductsList from '../components/UI/ProductsList';
 import Services from '../services/Services';
@@ -8,8 +9,8 @@ import Helmet from '../components/Helmet/Helmet';
 import '../styles/home.css';
 
 import { Container, Row, Col } from 'reactstrap';
-import { collection, getDocs } from "firebase/firestore";
-import { db } from '../firebase.config';
+// import { collection, getDocs } from "firebase/firestore";
+// import { db } from '../firebase.config';
 
 import heroImg from '../assets/images/ALIAAF_LOGO_575x434.png';
 
@@ -19,46 +20,36 @@ const Home = () => {
   const [bestSalesProducts, setBestSalesProducts] = useState([])
   const [mobileProducts, setMobileProducts] = useState([])
   const [wirelessProducts, setWirelessProducts] = useState([])
-  const [popularProducts, setPopularProducts] = useState([])
   const year = new Date().getFullYear();
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    async function fetchProducts() {
-        const data = []
-        const querySnapshot = await getDocs(collection(db, "products"));
-        querySnapshot.forEach((doc) => {
-            //console.log(doc.id, " => ", doc.data());
-            data.push(doc.data());
-        });
-
-        setProducts(data);
-    }
-
-    fetchProducts();
+    const getProducts = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/products");
+        setProducts(res.data);
+      } catch (err) {}
+    };
+    getProducts();
   }, []);
 
   useEffect(()=>{
     const filterdTrendingProducts = products.filter(
-      item => item.category === 'chair'
+      item => item.category === 'cat-1'
     );
     const filterdBestSalesProducts = products.filter(
-      item => item.category === 'sofa'
+      item => item.category === 'cat-2'
     );
     const filterdMobileProducts = products.filter(
-      item => item.category === 'mobile'
+      item => item.category === 'cat-3'
     );
     const filterdWirelessProducts = products.filter(
-      item => item.category === 'wireless'
-    );
-    const filterdPopularProducts = products.filter(
-      item => item.category === 'watch'
+      item => item.category === 'cat-4'
     );
     setTrendingProducts(filterdTrendingProducts)
     setBestSalesProducts(filterdBestSalesProducts)
     setMobileProducts(filterdMobileProducts)
     setWirelessProducts(filterdWirelessProducts)
-    setPopularProducts(filterdPopularProducts)
   }, [products]);
 
   return (
@@ -89,7 +80,7 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg='12' className='text-center mb-5'>
-              <h2 className='section__title'>Products</h2>
+              <h2 className='section__title'>Category 1</h2>
             </Col>
             <ProductsList data={trendingProducts}/>
           </Row>
@@ -99,7 +90,7 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg='12' className='text-center mb-5'>
-              <h2 className='section__title'>Category 1</h2>
+              <h2 className='section__title'>Category 2</h2>
             </Col>
             <ProductsList data={bestSalesProducts}/>
           </Row>
@@ -109,20 +100,10 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg='12' className='text-center mb-5'>
-              <h2 className='section__title'>Category 2</h2>
+              <h2 className='section__title'>Category 3-4</h2>
             </Col>
             <ProductsList data={mobileProducts} />
             <ProductsList data={wirelessProducts} />
-          </Row>
-        </Container>
-      </section>
-      <section className='popular__category'>
-        <Container>
-          <Row>
-            <Col lg='12' className='text-center mb-5'>
-              <h2 className='section__title'>Popular in Category</h2>
-            </Col>
-            <ProductsList data={popularProducts} />
           </Row>
         </Container>
       </section>

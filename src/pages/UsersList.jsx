@@ -3,11 +3,11 @@ import React, { useState, useEffect } from 'react';
 import CommonSection from '../components/UI/CommonSection';
 import Helmet from '../components/Helmet/Helmet';
 import { Container } from 'reactstrap';
-import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
-import { auth, db } from '../firebase.config';
+import { collection, getDocs } from "firebase/firestore";
+import { db } from '../firebase.config';
 //mport { deleteUser } from "firebase/auth";
 
-import { toast } from 'react-toastify';
+//import { toast } from 'react-toastify';
 
 const UsersList = () => {
     

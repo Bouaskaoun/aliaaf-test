@@ -9,12 +9,17 @@ import Signup from '../pages/Signup'
 import UsersList from '../pages/UsersList'
 import ProtectedRoute from './ProtectedRoute'
 
+import { useSelector } from "react-redux";
+
 const Routers = () => {
+  
+  const user = useSelector((state) => state.user.currentUser);
+  
   return (
     <Routes>
       <Route path='/' element={<Navigate to ='home' />} />
       <Route path='home' element={<Home />}/>
-      <Route path='login' element={<Login />}/>
+      <Route path='login' element={user ? <Navigate to="/" /> : <Login />}/>
       <Route 
         path='addProducts'
         element={
@@ -39,7 +44,7 @@ const Routers = () => {
           </ProtectedRoute>
         }
       />
-      <Route path='signup' element={<Signup />}/>
+      <Route path='signup' element={user ? <Navigate to="/" /> : <Signup />}/>
       <Route path='users' element={<UsersList />}/>
       <Route path='*' element={<PageNotFound />}/>
     </Routes>

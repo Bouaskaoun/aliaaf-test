@@ -2,37 +2,53 @@ import React, {useState} from 'react';
 import { Container, Row, Col, Form, FormGroup } from 'reactstrap';
 import Helmet from '../components/Helmet/Helmet';
 import { Link, useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase.config';
+import { login } from "../redux/apiCalls";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify';
 
 import '../styles/login.css'
 
 const Login = () => {
 
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
 
-  const signIn = async (e)=>{
-    e.preventDefault()
-    setLoading(true)
+  // const signIn = async (e)=>{
+  //   e.preventDefault()
+  //   setLoading(true)
 
+  //   try {
+  //     const userCredential = await signInWithEmailAndPassword(auth,email,password)
+  //     // eslint-disable-next-line  
+  //     const user = userCredential.user
+  //     setLoading(false)
+  //     toast.success('Successfully logged In')
+  //     navigate('/home')
+
+  //   } catch (error) {
+  //     setLoading(false)
+  //     toast.error(error.message)
+  //   }
+  // }
+
+  //const { isFetching, error } = useSelector((state) => state.user);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    setLoading(true);
     try {
-      const userCredential = await signInWithEmailAndPassword(auth,email,password)
-      // eslint-disable-next-line  
-      const user = userCredential.user
+      login(dispatch, { username, password });
       setLoading(false)
       toast.success('Successfully logged In')
-      navigate('/home')
-
     } catch (error) {
       setLoading(false)
       toast.error(error.message)
     }
-  }
+  };
 
   return (
     <Helmet title='Login'>
@@ -47,13 +63,13 @@ const Login = () => {
               ) : (
                 <Col lg='6' className='m-auto text-center'>
                   <h3 className='fw-bold mb-4'>Login</h3>
-                  <Form className='auth__form'onSubmit={signIn}>
+                  <Form className='auth__form'onSubmit={handleClick}>
                     <FormGroup className='form__group'>
                       <input 
-                        type='email' 
-                        placeholder='Enter your email'
-                        value={email}
-                        onChange={e => setEmail(e.target.value)} 
+                        type='text' 
+                        placeholder='Enter your Username'
+                        value={username}
+                        onChange={e => setUsername(e.target.value)} 
                       />
                     </FormGroup>
                     <FormGroup className='form__group'>

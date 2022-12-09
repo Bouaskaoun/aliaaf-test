@@ -11,6 +11,7 @@ import './header.css';
 import logo from '../../assets/images/ALIAAF LOGO v1.png'
 import userIcon from '../../assets/images/user-icon.png'
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 
 const nav__links = [
   {
@@ -72,6 +73,8 @@ const Header = () => {
 
   const toggleProfileActions = ()=> profileActionRef.current.classList.toggle('show__profileActions')
 
+  const user = useSelector((state) => state.user.currentUser);
+
   return (
     <header className="header" ref={headerRef}>
       <Container>
@@ -101,6 +104,7 @@ const Header = () => {
             </div>
             <div className="nav__icons">
               <div className='profile'>
+                <span>{user ? user.username :'Not logged'} </span>
                 <motion.img 
                   whileTap={{ scale: 1.2 }} 
                   src={userIcon} 

@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import { Container, Row, Col, Form, FormGroup } from 'reactstrap';
 import Helmet from '../components/Helmet/Helmet';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { login } from "../redux/apiCalls";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast } from 'react-toastify';
 
 import '../styles/login.css'
@@ -15,7 +15,7 @@ const Login = () => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
 
-  const navigate = useNavigate()
+  //const navigate = useNavigate()
 
   // const signIn = async (e)=>{
   //   e.preventDefault()

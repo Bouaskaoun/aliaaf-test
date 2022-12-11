@@ -10,6 +10,8 @@ import UsersList from '../pages/UsersList'
 import ProtectedRoute from './ProtectedRoute'
 
 import { useSelector } from "react-redux";
+import ProductList from '../pages/ProductList'
+import Product from '../pages/Product'
 
 const Routers = () => {
   
@@ -19,6 +21,8 @@ const Routers = () => {
     <Routes>
       <Route path='/' element={<Navigate to ='home' />} />
       <Route path='home' element={<Home />}/>
+      <Route path='products' element={<ProductList />}/>
+      <Route path='product/:id' element={<Product />}/>
       <Route path='login' element={user ? <Navigate to="/" /> : <Login />}/>
       <Route 
         path='addProducts'

@@ -88,53 +88,54 @@ const AddProducts = () => {
             <Col lg='6' className='m-auto text-center'>
                 <h3 className='fw-bold mb-4'>Add Product</h3>
                 <Form className='auth__form' onSubmit={addProduct}>
-                <FormGroup className='form__group'>
-                    <input 
-                    type='text' 
-                    placeholder='Title'
-                    value={title}
-                    onChange={e => setTitle(e.target.value)} 
-                    />
-                </FormGroup>
-                <FormGroup className='form__group'>
-                    <input 
-                    type='text' 
-                    placeholder='Category'
-                    value={category}
-                    onChange={e => setCategory(e.target.value)} 
-                    />
-                </FormGroup>
-                <FormGroup className='form__group'>
-                    <input 
-                    type='text'
-                    placeholder='Author'
-                    value={author}
-                    onChange={e => setAuthor(e.target.value)} 
-                    />
-                </FormGroup>
-                <FormGroup className='form__group'>
-                    <input 
-                    type='text' 
-                    placeholder='desc'
-                    value={desc}
-                    onChange={e => setDesc(e.target.value)} 
-                    />
-                </FormGroup>
-                <FormGroup className='form__group'>
-                    <input 
-                    type='file'
-                    accept="image/png, image/jpeg"
-                    onChange={e => setImg(e.target.files[0])} 
-                    />
-                </FormGroup>
-                <FormGroup className='form__group'>
-                    <input 
-                    type='file'
-                    accept=".pdf"
-                    onChange={e => setPdf(e.target.files[0])} 
-                    />
-                </FormGroup>
-                <button type='submit' className='auth__btn'>Create a Product</button>
+                  <FormGroup className='form__group'>
+                      <input 
+                      type='text' 
+                      placeholder='Title'
+                      value={title}
+                      onChange={e => setTitle(e.target.value)} 
+                      />
+                  </FormGroup>
+                  <FormGroup className='form__group'>
+                      <input 
+                      type='text' 
+                      placeholder='Category'
+                      value={category}
+                      onChange={e => setCategory(e.target.value)} 
+                      />
+                  </FormGroup>
+                  <FormGroup className='form__group'>
+                      <input 
+                      type='text'
+                      placeholder='Author'
+                      value={author}
+                      onChange={e => setAuthor(e.target.value)} 
+                      />
+                  </FormGroup>
+                  <FormGroup className='form__group'>
+                      <textarea 
+                      id="description"
+                      name="description"
+                      placeholder='description'
+                      value={desc}
+                      onChange={e => setDesc(e.target.value)} 
+                      />
+                  </FormGroup>
+                  <FormGroup className='form__group'>
+                      <input 
+                      type='file'
+                      accept="image/png, image/jpeg"
+                      onChange={e => setImg(e.target.files[0])} 
+                      />
+                  </FormGroup>
+                  <FormGroup className='form__group'>
+                      <input 
+                      type='file'
+                      accept=".pdf"
+                      onChange={e => setPdf(e.target.files[0])} 
+                      />
+                  </FormGroup>
+                  <button type='submit' className='auth__btn'>Create a Product</button>
                 </Form>
             </Col>
           </Row>

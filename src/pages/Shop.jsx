@@ -69,6 +69,20 @@ const Shop = () => {
     setProductsData(searchProducts)
   }
 
+  const handleSort = (e) => {
+    const sortValue = e.target.value
+    if(sortValue === 'ascending'){
+      const sortedProducts = [...products].sort((a, b) => a.title > b.title ? 1 : -1)
+      setProductsData(sortedProducts)
+    }
+    if(sortValue === 'descending'){
+      const sortedProducts = [...products].sort((a, b) => a.title > b.title ? -1 : 1)
+      setProductsData(sortedProducts)
+    }
+    if(sortValue === 'reset'){
+      setProductsData(products)
+    }
+  }
 
   return (
     <Helmet title='Shop'>
@@ -90,8 +104,8 @@ const Shop = () => {
             </Col>
             <Col lg='3' md='6' className='text-end'>
               <div className="filter__widget">
-                <select>
-                  <option>Sort By</option>
+                <select onChange={handleSort}>
+                  <option value="reset">Sort By</option>
                   <option value="ascending">Ascending</option>
                   <option value="descending">Descending</option>
                 </select>

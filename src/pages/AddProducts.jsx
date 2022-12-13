@@ -85,10 +85,62 @@ const AddProducts = () => {
       <section>
         <Container>
           <Row>
-            <Col lg='6' className='m-auto text-center'>
-                <h3 className='fw-bold mb-4'>Add Product</h3>
-                <Form className='auth__form' onSubmit={addProduct}>
-                  <FormGroup className='form__group'>
+            <Col lg='6' className='m-auto'>
+              <h3 className='fw-bold mb-4'>Add Product</h3>
+              {/* <Form className='auth__form' onSubmit={addProduct}>
+                <FormGroup className='form__group'>
+                    <input 
+                    type='text' 
+                    placeholder='Title'
+                    value={title}
+                    onChange={e => setTitle(e.target.value)} 
+                    />
+                </FormGroup>
+                <FormGroup className='form__group'>
+                    <input 
+                    type='text' 
+                    placeholder='Category'
+                    value={category}
+                    onChange={e => setCategory(e.target.value)} 
+                    />
+                </FormGroup>
+                <FormGroup className='form__group'>
+                    <input 
+                    type='text'
+                    placeholder='Author'
+                    value={author}
+                    onChange={e => setAuthor(e.target.value)} 
+                    />
+                </FormGroup>
+                <FormGroup className='form__group'>
+                    <textarea 
+                    id="description"
+                    name="description"
+                    placeholder='description'
+                    value={desc}
+                    onChange={e => setDesc(e.target.value)} 
+                    />
+                </FormGroup>
+                <FormGroup className='form__group'>
+                    <input 
+                    type='file'
+                    accept="image/png, image/jpeg"
+                    onChange={e => setImg(e.target.files[0])} 
+                    />
+                </FormGroup>
+                <FormGroup className='form__group'>
+                    <input 
+                    type='file'
+                    accept=".pdf"
+                    onChange={e => setPdf(e.target.files[0])} 
+                    />
+                </FormGroup>
+                <button type='submit' className='auth__btn'>Create a Product</button>
+              </Form> */}
+              
+              <div className="newUser">
+                <Form className='newUserForm' onSubmit={addProduct}>
+                  <FormGroup className='newUserItem'>
                       <input 
                       type='text' 
                       placeholder='Title'
@@ -96,7 +148,7 @@ const AddProducts = () => {
                       onChange={e => setTitle(e.target.value)} 
                       />
                   </FormGroup>
-                  <FormGroup className='form__group'>
+                  <FormGroup className='newUserItem'>
                       <input 
                       type='text' 
                       placeholder='Category'
@@ -104,7 +156,7 @@ const AddProducts = () => {
                       onChange={e => setCategory(e.target.value)} 
                       />
                   </FormGroup>
-                  <FormGroup className='form__group'>
+                  <FormGroup className='newUserItem'>
                       <input 
                       type='text'
                       placeholder='Author'
@@ -112,31 +164,33 @@ const AddProducts = () => {
                       onChange={e => setAuthor(e.target.value)} 
                       />
                   </FormGroup>
-                  <FormGroup className='form__group'>
+                  <FormGroup className='newUserItem'>
                       <textarea 
                       id="description"
                       name="description"
-                      placeholder='description'
+                      placeholder=' Description'
+                      rows='5'
                       value={desc}
-                      onChange={e => setDesc(e.target.value)} 
+                      onChange={e => setDesc(e.target.value)}
                       />
                   </FormGroup>
-                  <FormGroup className='form__group'>
+                  <FormGroup>
                       <input 
                       type='file'
                       accept="image/png, image/jpeg"
                       onChange={e => setImg(e.target.files[0])} 
                       />
                   </FormGroup>
-                  <FormGroup className='form__group'>
+                  <FormGroup>
                       <input 
                       type='file'
                       accept=".pdf"
                       onChange={e => setPdf(e.target.files[0])} 
                       />
                   </FormGroup>
-                  <button type='submit' className='auth__btn'>Create a Product</button>
+                  <button type='submit' className='newUserButton'>Create a Product</button>
                 </Form>
+              </div>
             </Col>
           </Row>
         </Container>

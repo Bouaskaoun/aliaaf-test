@@ -24,40 +24,13 @@ const Shop = () => {
     getProducts();
   }, []);
 
-  const handleFilter = (e) => {
-    const filterValue = e.target.value 
-    if(filterValue === 'cat-1'){
-      const filtredProducts = products.filter(
-        item => item.category === 'cat-1'
-      );
-      setProductsData(filtredProducts)
-    }
-    if(filterValue === 'cat-2'){
-      const filtredProducts = products.filter(
-        item => item.category === 'cat-2'
-      );
-      setProductsData(filtredProducts)
-    }
-    if(filterValue === 'cat-3'){
-      const filtredProducts = products.filter(
-        item => item.category === 'cat-3'
-      );
-      setProductsData(filtredProducts)
-    }
-    if(filterValue === 'cat-4'){
-      const filtredProducts = products.filter(
-        item => item.category === 'cat-4'
-      );
-      setProductsData(filtredProducts)
-    }
-    if(filterValue === 'cat-4'){
-      const filtredProducts = products.filter(
-        item => item.category === 'cat-4'
-      );
-      setProductsData(filtredProducts)
-    }
-    if(filterValue === 'reset'){
+  const handleFilter = (value) => {
+    if(value === 'reset'){
       setProductsData(products)
+    }
+    else{
+      const filterProducts = products.filter(item => item.category === value)
+      setProductsData(filterProducts)
     }
   }
 
@@ -92,13 +65,22 @@ const Shop = () => {
           <Row>
             <Col lg='3' md='6'>
               <div className="filter__widget">
-                <select onChange={handleFilter}>
+                <select onChange={e => handleFilter(e.target.value)}>
                   <option value="reset">Filter By Category</option>
-                  <option value="cat-1">cat-1</option>
-                  <option value="cat-2">cat-2</option>
-                  <option value="cat-3">cat-3</option>
-                  <option value="cat-4">cat-4</option>
-                  <option value="cat-4">cat-4</option>
+                  <option value="Textes_réglementaires">Textes réglementaires</option>
+                  <option value="PFE">PFE</option>
+                  <option value="Management_de_la_Production">Management de la Production</option>
+                  <option value="Articles_scientifiques">Articles scientifiques</option>
+                  <option value="Techniques_de_l'ingénieur">Techniques de l'ingénieur</option>
+                  <option value="Normes_marocaines">Normes marocaines</option>
+                  <option value="Insertion_professionnells">Insertion professionnells</option>
+                  <option value="Anciens_concours_de_l'Etat">Anciens concours de l'Etat</option>
+                  <option value="QHSE">QHSE</option>
+                  <option value="Normes_et_référentiels">Normes et référentiels</option>
+                  <option value="Gestion_de_projet">Gestion de projet</option>
+                  <option value="Procédés_de_fabrication">Procédés de fabrication</option>
+                  <option value="MSDA">MSDA</option>
+                  <option value="GBPF">GBPF</option>
                 </select>
               </div>
             </Col>

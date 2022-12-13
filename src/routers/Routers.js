@@ -6,7 +6,6 @@ import PageNotFound from '../pages/PageNotFound'
 import ProductDetails from '../pages/ProductDetails'
 import Shop from '../pages/Shop'
 import Signup from '../pages/Signup'
-import UsersList from '../pages/UsersList'
 import ProtectedRoute from './ProtectedRoute'
 
 import { useSelector } from "react-redux";
@@ -55,7 +54,6 @@ const Routers = () => {
         }
       />
       <Route path='signup' element={<Signup />}/>
-      <Route path='users' element={<UsersList />}/>
       <Route path='*' element={<PageNotFound />}/>
     </Routes>
   )

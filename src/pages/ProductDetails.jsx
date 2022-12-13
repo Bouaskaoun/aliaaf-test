@@ -27,7 +27,6 @@ const ProductDetails = () => {
   }, []);
 
   const {id} = useParams()
-  console.log(id)
   const product = products.find(item => item._id === id)
   
   const relatedProducts = products.filter(item => item.category === product?.category)

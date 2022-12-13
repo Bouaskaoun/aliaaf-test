@@ -2,16 +2,13 @@ import React, {useRef, useEffect} from 'react';
 import { NavLink, useNavigate, Link } from 'react-router-dom';
 import {motion} from 'framer-motion'
 import { Container, Row } from 'reactstrap';
-import useAuth from '../../custom-hooks/useAuth';
-import { signOut } from 'firebase/auth';
-import { auth } from '../../firebase.config';
+import { useSelector } from "react-redux";
 
 
 import './header.css';
 import logo from '../../assets/images/ALIAAF LOGO v1.png'
 import userIcon from '../../assets/images/user-icon.png'
 import { toast } from 'react-toastify';
-import { useSelector } from 'react-redux';
 
 const nav__links = [
   {
@@ -21,24 +18,12 @@ const nav__links = [
   {
     path:'shop',
     display:'Books'
-  },
-  {
-    path:'login',
-    display:'Login'
-  },
-  {
-    path:'addProducts',
-    display:'AddProducts'
-  },
-  {
-    path:'signup',
-    display:'Signup'
   }
 ]
 
 const Header = () => {
 
-  const {currentUser} = useAuth()
+  const user = useSelector((state) => state.user.currentUser);
   const navigate = useNavigate()
   const headerRef = useRef(null)
   const menuRef = useRef(null)
@@ -55,13 +40,7 @@ const Header = () => {
   };
 
   const logout = () => {
-    signOut(auth).then(() => {
-      toast.success('Logged out')
-      navigate('/home')
-    }).catch(err => {
-      toast.error(err.message)
-    })
-
+    toast.success('Logged out')
   }
 
   useEffect(()=>{
@@ -72,8 +51,6 @@ const Header = () => {
   const menuToggle = ()=> menuRef.current.classList.toggle('active__menu')
 
   const toggleProfileActions = ()=> profileActionRef.current.classList.toggle('show__profileActions')
-
-  const user = useSelector((state) => state.user.currentUser);
 
   return (
     <header className="header" ref={headerRef}>
@@ -117,11 +94,14 @@ const Header = () => {
                   onClick={toggleProfileActions}
                 >
                   {
-                    currentUser ? (
-                      <span onClick={logout}>Logout</span>
+                    user ? (
+                      <div className='d-flex align-items-center justify-content-center flex-column'>
+                        <span onClick={logout}>Logout</span>
+                        <Link to='/products'>Products</Link>
+                        <Link to='/users'>Users</Link>
+                      </div>
                     ) : (
                       <div className='d-flex align-items-center justify-content-center flex-column'>
-                        <Link to='/signup'>Signup</Link>
                         <Link to='/login'>Login</Link>
                       </div>
                     )

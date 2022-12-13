@@ -13,7 +13,7 @@ const Footer = () => {
           <Col lg='4' md='6' className='mb-4'>
             <div className="logo">
               <div>
-                <h1 className='text-white'>Multimart</h1>
+                <h1 className='text-white'>ALIAAF</h1>
               </div>
             </div>
             <p className="footer__text mt-4">
@@ -25,16 +25,16 @@ const Footer = () => {
               <h4 className='quick__links-title'>Top Categories</h4>
               <ListGroup className='mb-3'>
                 <ListGroupItem className='ps-0 border-0'>
-                  <Link to='#'>Mobile Phones</Link>
+                  <Link to='#'>category 1</Link>
                 </ListGroupItem>
                 <ListGroupItem className='ps-0 border-0'>
-                  <Link to='#'>Modern Sofa</Link>
+                  <Link to='#'>category 2</Link>
                 </ListGroupItem>
                 <ListGroupItem className='ps-0 border-0'>
-                  <Link to='#'>Arm Chair</Link>
+                  <Link to='#'>category 3</Link>
                 </ListGroupItem>
                 <ListGroupItem className='ps-0 border-0'>
-                  <Link to='#'>Smart Watches</Link>
+                  <Link to='#'>category 4</Link>
                 </ListGroupItem>
               </ListGroup>
             </div>
@@ -44,10 +44,7 @@ const Footer = () => {
               <h4 className='quick__links-title'>Useful Links</h4>
               <ListGroup className='mb-3'>
                 <ListGroupItem className='ps-0 border-0'>
-                  <Link to='/shop'>Shop</Link>
-                </ListGroupItem>
-                <ListGroupItem className='ps-0 border-0'>
-                  <Link to='#'>Cart</Link>
+                  <Link to='/shop'>Products</Link>
                 </ListGroupItem>
                 <ListGroupItem className='ps-0 border-0'>
                   <Link to='/login'>Login</Link>

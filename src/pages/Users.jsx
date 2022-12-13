@@ -18,9 +18,12 @@ export default function Users() {
       getUsers();
     }, []);
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
-  };
+    const handleDelete = (id) => {
+      try {
+        userRequest.delete("users/" + id)
+        .then(() => userRequest.get("users").then(res => setData(res.data)));
+      } catch (err) {}
+    };
   
   const columns = [
     { field: "_id", headerName: "ID", width: 90 },
@@ -55,7 +58,7 @@ export default function Users() {
             </Link>
             <DeleteOutline
               className="userListDelete"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row._id)}
             />
           </>
         );

@@ -3,7 +3,7 @@ import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { publicRequest, userRequest } from "../requestMethods";
 
 export default function ProductList() {
 
@@ -12,7 +12,7 @@ export default function ProductList() {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/products");
+        const res = await publicRequest.get("products");
         setData(res.data);
       } catch (err) {}
     };
@@ -20,7 +20,10 @@ export default function ProductList() {
   }, []);
 
   const handleDelete = (id) => {
-    setData(data.filter((item) => item._id !== id));
+    try {
+      userRequest.delete("products/" + id)
+      .then(() => publicRequest.get("products").then(res => setData(res.data)));
+    } catch (err) {}
   };
 
   const columns = [

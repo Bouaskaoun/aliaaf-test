@@ -1,4 +1,6 @@
 .userList {
+    width: 80%;
+    margin: 0 auto;
     flex: 4;
   }
   

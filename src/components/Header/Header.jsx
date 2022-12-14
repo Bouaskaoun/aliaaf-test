@@ -2,13 +2,14 @@ import React, {useRef, useEffect} from 'react';
 import { NavLink, useNavigate, Link } from 'react-router-dom';
 import {motion} from 'framer-motion'
 import { Container, Row } from 'reactstrap';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 import './header.css';
-import logo from '../../assets/images/ALIAAF LOGO v1.png'
-import userIcon from '../../assets/images/user-icon.png'
+import logo from '../../assets/images/ALIAAF LOGO v1.png';
+import userIcon from '../../assets/images/user-icon.png';
 import { toast } from 'react-toastify';
+import { logoutSuccess } from '../../redux/userRedux';
 
 const nav__links = [
   {
@@ -27,6 +28,7 @@ const Header = () => {
   const navigate = useNavigate()
   const headerRef = useRef(null)
   const menuRef = useRef(null)
+  const dispatch = useDispatch()
   const profileActionRef = useRef(null)
 
   const stickyHeaderFunc = ()=>{
@@ -40,6 +42,10 @@ const Header = () => {
   };
 
   const logout = () => {
+    localStorage.removeItem('persist:root');
+    dispatch(logoutSuccess());
+  
+    navigate('/login');
     toast.success('Logged out')
   }
 

@@ -18,6 +18,13 @@ const Home = () => {
   const [filterdProducts, setfilterdProducts] = useState([])
 
   useEffect(() => {
+    // publicRequest.get('users').then(res => {
+    //   console.log(res.data);
+    // }).catch(err => {
+    //   // console.log(err);
+    //   localStorage.removeItem('persist:root');
+    // })
+
     const getProducts = async () => {
       try {
         const res = await publicRequest.get("products");

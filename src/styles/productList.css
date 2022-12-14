@@ -1,4 +1,6 @@
 .productList{
+    width: 80%;
+    margin: 0 auto;
     flex: 4;
 }
 
@@ -28,4 +30,4 @@
 .productListDelete{
     color: red;
     cursor: pointer;
-}
+}  

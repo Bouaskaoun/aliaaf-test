@@ -27,7 +27,7 @@ export default function ProductList() {
   };
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 100 },
+    { field: "_id", headerName: "ID", width: 200 },
     {
       field: "title",
       headerName: "Product",
@@ -75,13 +75,24 @@ export default function ProductList() {
   return (
     <div className="Container">
       <div className="productList">
+        <div className="userTitleContainer">
+          <h1 className="userTitle">Products Lists</h1>
+          <Link to="/addProducts">
+            <button className="userAddButton">Create</button>
+          </Link>
+        </div>
         <DataGrid
           getRowId={(row) => row._id}
           rows={data}
           columns={columns}
+          disableColumnSelector = {true}
+          // disable sorting
+          disableColumnMenu
+          // disable selection
+
+          
           disableSelectionOnClick
           pageSize={8}
-          checkboxSelection
           autoHeight
         />
       </div>

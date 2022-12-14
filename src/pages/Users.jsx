@@ -26,7 +26,7 @@ export default function Users() {
     };
   
   const columns = [
-    { field: "_id", headerName: "ID", width: 90 },
+    { field: "_id", headerName: "ID", width: 200 },
     {
       field: "username",
       headerName: "User",
@@ -68,13 +68,18 @@ export default function Users() {
 
   return (
     <div className="userList">
+      <div className="userTitleContainer">
+        <h1 className="userTitle">Products Lists</h1>
+        <Link to="/addProducts">
+          <button className="userAddButton">Create</button>
+        </Link>
+      </div>
       <DataGrid
         getRowId={(row) => row._id}
         rows={data}
         disableSelectionOnClick
         columns={columns}
         pageSize={8}
-        checkboxSelection
         autoHeight
       />
     </div>

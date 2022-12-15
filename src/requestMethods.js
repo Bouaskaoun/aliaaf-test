@@ -1,15 +1,15 @@
 import axios from "axios";
 
-// const BASE_URL = "http://localhost:5000/api/";
-const BASE_URL = "https://aliaaf-api.onrender.com/api/";
+const BASE_URL = "http://localhost:5000/api/";
+//const BASE_URL = "https://aliaaf-api.onrender.com/api/";
 // const TOKEN =
 //   JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser
 //     .accessToken || "";
 
 const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
 const currentUser = user && JSON.parse(user).currentUser;
-const TOKEN = currentUser?.accessToken;
-//const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOTY2MGFiOWM3ZTMxN2MyYTFiN2FiZSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY3MDg5MjA4MiwiZXhwIjoxNjcxMTUxMjgyfQ.Z-8kIeJ8JJTeo9WR4Y2ux7rIC2GB2fyaWIakSpKDzF0'
+//const TOKEN = currentUser?.accessToken;
+const TOKEN = currentUser?.token;
 
 export const publicRequest = axios.create({
   baseURL: BASE_URL,

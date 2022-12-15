@@ -103,8 +103,14 @@ const Header = () => {
                     user ? (
                       <div className='d-flex align-items-center justify-content-center flex-column'>
                         <span onClick={logout}>Logout</span>
-                        <Link to='/products'>Products</Link>
-                        <Link to='/users'>Users</Link>
+                        {
+                          user.isAdmin && (
+                            <>
+                            <Link to='/products'>Products</Link>
+                            <Link to='/users'>Users</Link>
+                            </>
+                          )
+                        }
                       </div>
                     ) : (
                       <div className='d-flex align-items-center justify-content-center flex-column'>

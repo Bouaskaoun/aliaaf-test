@@ -3,12 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { useParams } from 'react-router-dom';
 import {motion} from 'framer-motion';
-import axios from 'axios';
 
 import Helmet from '../components/Helmet/Helmet';
 import CommonSection from '../components/UI/CommonSection';
 import ProductsList from '../components/UI/ProductsList';
 
+import { publicRequest } from '../requestMethods';
 import '../styles/product-details.css';
 
 
@@ -19,7 +19,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/products");
+        const res = await publicRequest.get("products");
         setProducts(res.data);
       } catch (err) {}
     };

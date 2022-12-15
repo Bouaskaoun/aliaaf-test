@@ -3,10 +3,10 @@ import React, { useState, useEffect } from 'react';
 import CommonSection from '../components/UI/CommonSection';
 import Helmet from '../components/Helmet/Helmet';
 import { Container, Row, Col } from 'reactstrap';
-import axios from 'axios';
 
-import '../styles/shop.css';
 import ProductsList from '../components/UI/ProductsList';
+import { publicRequest } from '../requestMethods';
+import '../styles/shop.css';
 
 const Shop = () => {
 
@@ -16,7 +16,7 @@ const Shop = () => {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/products");
+        const res = await publicRequest.get("products");
         setProducts(res.data);
         setProductsData(res.data);
       } catch (err) {}

@@ -69,8 +69,8 @@ export default function Users() {
   return (
     <div className="userList">
       <div className="userTitleContainer">
-        <h1 className="userTitle">Products Lists</h1>
-        <Link to="/addProducts">
+        <h1 className="userTitle">Users Lists</h1>
+        <Link to="/newUser">
           <button className="userAddButton">Create</button>
         </Link>
       </div>

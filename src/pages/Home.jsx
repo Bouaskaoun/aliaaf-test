@@ -35,7 +35,7 @@ const Home = () => {
   }, []);
 
   useEffect(()=>{
-    const filterdCategoryProducts = products.filter(item => item.category === 'cat-1');
+    const filterdCategoryProducts = products.filter(item => item.category === 'PFE');
     setfilterdProducts(filterdCategoryProducts);
   }, [products]);
 

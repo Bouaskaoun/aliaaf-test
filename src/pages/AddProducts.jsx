@@ -20,38 +20,130 @@ const AddProducts = () => {
   const [img, setImg] = useState(null)
   const [pdf, setPdf] = useState(null)
 
+  // const addProduct = async(e) => {
+  //   e.preventDefault()
+  //   let imgUrl = ''
+  //   if(img == null){
+  //     imgUrl = missingFile
+  //   }
+  //   else{
+  //     const storageRef = ref(storage, `imgFiles/${img.name}`);
+  //     const uploadTaskImg = uploadBytesResumable(storageRef, img);
+  //     imgUrl = await getDownloadURL(uploadTaskImg.snapshot.ref)
+  //   }
+  //   const storagePdfRef = ref(storage, `pdfFiles/${pdf.name}`);
+  //   const uploadTaskPdf = uploadBytesResumable(storagePdfRef, pdf);
+  //   const pdfUrl = await getDownloadURL(uploadTaskPdf.snapshot.ref)
+    
+  //   await userRequest.post('products', {
+  //     title: title,
+  //     category: category,
+  //     author: author ? author : 'Anonymous',
+  //     desc: desc ? desc : 'No description',
+  //     img: imgUrl,
+  //     pdf: pdfUrl
+  //   })
+  //   .then(() => {
+  //     setTitle('')
+  //     setAuthor('')
+  //     setDesc('')
+  //     e.target.reset();
+  //     toast.success('Product Created')
+  //   })
+  //   .catch(err => {
+  //     toast.error(err.response.data.message)
+  //   })
+  // }
+
   const addProduct = async(e) => {
     e.preventDefault()
     let imgUrl = ''
+    let pdfUrl = ''
     if(img == null){
       imgUrl = missingFile
     }
     else{
       const storageRef = ref(storage, `imgFiles/${img.name}`);
-      const uploadTaskImg = uploadBytesResumable(storageRef, img);
-      imgUrl = await getDownloadURL(uploadTaskImg.snapshot.ref)
+      uploadBytesResumable(storageRef, img).on('state_changed', (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+        switch (snapshot.state) {
+          case 'paused':
+            console.log('Upload is paused');
+            break;
+          case 'running':
+            console.log('Upload is running');
+            break;
+          default:
+            console.log('Upload is running');
+        }
+      }, (error) => {
+        switch (error.code) {
+          case 'storage/unauthorized':
+            console.log('User doesn\'t have permission to access the object');
+            break;
+          case 'storage/canceled':
+            console.log('User canceled the upload');
+            break;
+          case 'storage/unknown':
+            console.log('Unknown error occurred, inspect error.serverResponse');
+            break;
+          default:
+            console.log('Unknown error occurred, inspect error.serverResponse');
+        }
+      }, async() => {
+        imgUrl = await getDownloadURL(storageRef)
+      })
     }
+
     const storagePdfRef = ref(storage, `pdfFiles/${pdf.name}`);
-    const uploadTaskPdf = uploadBytesResumable(storagePdfRef, pdf);
-    const pdfUrl = await getDownloadURL(uploadTaskPdf.snapshot.ref)
-    
-    await userRequest.post('products', {
-      title: title,
-      category: category,
-      author: author ? author : 'Anonymous',
-      desc: desc ? desc : 'No description',
-      img: imgUrl,
-      pdf: pdfUrl
-    })
-    .then(() => {
-      setTitle('')
-      setAuthor('')
-      setDesc('')
-      e.target.reset();
-      toast.success('Product Created')
-    })
-    .catch(err => {
-      toast.error(err.response.data.message)
+    uploadBytesResumable(storagePdfRef, pdf).on('state_changed', (snapshot) => {
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('Upload is ' + progress + '% done');
+      switch (snapshot.state) {
+        case 'paused':
+          console.log('Upload is paused');
+          break;
+        case 'running':
+          console.log('Upload is running');
+          break;
+        default:
+          console.log('Upload is running');
+      }
+    }, (error) => {
+      switch (error.code) {
+        case 'storage/unauthorized':
+          console.log('User doesn\'t have permission to access the object');
+          break;
+        case 'storage/canceled':
+          console.log('User canceled the upload');
+          break;
+        case 'storage/unknown':
+          console.log('Unknown error occurred, inspect error.serverResponse');
+          break;
+        default:
+          console.log('Unknown error occurred, inspect error.serverResponse');
+      }
+    }, async() => {
+      pdfUrl = await getDownloadURL(storagePdfRef)
+      await userRequest.post('products', {
+        title: title,
+        category: category,
+        author: author ? author : 'Anonymous',
+        desc: desc ? desc : 'No description',
+        img: imgUrl,
+        pdf: pdfUrl
+      })
+      .then(() => {
+        setTitle('')
+        setAuthor('')
+        setDesc('')
+        e.target.reset();
+        toast.success('Product Created')
+      })
+      .catch(err => {
+        toast.error(err.response.data.message)
+      })
     })
   }
 

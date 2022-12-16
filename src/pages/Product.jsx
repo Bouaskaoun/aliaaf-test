@@ -41,25 +41,84 @@ export default function Product() {
 
     const updateProduct = async(e) => {
         e.preventDefault()
+        let imgUrl = ''
+        let pdfUrl = ''
         
         const storageRef = ref(storage, `imgFiles/${img.name}`);
-        const uploadTaskImg = uploadBytesResumable(storageRef, img);
+        uploadBytesResumable(storageRef, img).on('state_changed', (snapshot) => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+              case 'paused':
+                console.log('Upload is paused');
+                break;
+              case 'running':
+                console.log('Upload is running');
+                break;
+              default:
+                console.log('Upload is running');
+            }
+          }, (error) => {
+            switch (error.code) {
+              case 'storage/unauthorized':
+                console.log('User doesn\'t have permission to access the object');
+                break;
+              case 'storage/canceled':
+                console.log('User canceled the upload');
+                break;
+              case 'storage/unknown':
+                console.log('Unknown error occurred, inspect error.serverResponse');
+                break;
+              default:
+                console.log('Unknown error occurred, inspect error.serverResponse');
+            }
+          }, async() => {
+            imgUrl = await getDownloadURL(storageRef)
+          })
         const storagePdfRef = ref(storage, `pdfFiles/${pdf.name}`);
-        const uploadTaskPdf = uploadBytesResumable(storagePdfRef, pdf);
-        const imgUrl = await getDownloadURL(uploadTaskImg.snapshot.ref);
-        const pdfUrl = await getDownloadURL(uploadTaskPdf.snapshot.ref);
-        
-        await userRequest.put(`products/${id}`, {
+        uploadBytesResumable(storagePdfRef, pdf).on('state_changed', (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+          switch (snapshot.state) {
+            case 'paused':
+              console.log('Upload is paused');
+              break;
+            case 'running':
+              console.log('Upload is running');
+              break;
+            default:
+              console.log('Upload is running');
+          }
+        }, (error) => {
+          switch (error.code) {
+            case 'storage/unauthorized':
+              console.log('User doesn\'t have permission to access the object');
+              break;
+            case 'storage/canceled':
+              console.log('User canceled the upload');
+              break;
+            case 'storage/unknown':
+              console.log('Unknown error occurred, inspect error.serverResponse');
+              break;
+            default:
+              console.log('Unknown error occurred, inspect error.serverResponse');
+          }
+        }, async() => {
+          pdfUrl = await getDownloadURL(storagePdfRef)
+          await userRequest.put(`products/${id}`, {
             title: title,
             category: category,
             author: author ? author : 'Anonymous',
             desc: desc ? desc : 'No description',
             img: imgUrl.includes('undefined') ? img : imgUrl,
             pdf: pdfUrl.includes('undefined') ? pdf : pdfUrl
-        }).then(() => {
+          })
+          .then(() => {
             toast.success('Product Updated')
-        }).catch((err) => {
+          })
+          .catch(err => {
             toast.error('product not updated')
+          })
         })
     }
     
@@ -116,12 +175,23 @@ export default function Product() {
                     </div>
                     <div className="addProductItem">
                         <label>Category</label>
-                        <input 
-                        type='text' 
-                        placeholder={category}
-                        value={category}
-                        onChange={e => setCategory(e.target.value)} 
-                        />
+                        <select onChange={e => setCategory(e.target.value)} >
+                            <option value="default">Select Category</option>
+                            <option value="Textes_réglementaires">Textes réglementaires</option>
+                            <option value="PFE">PFE</option>
+                            <option value="Management_de_la_Production">Management de la Production</option>
+                            <option value="Articles_scientifiques">Articles scientifiques</option>
+                            <option value="Techniques_de_l'ingénieur">Techniques de l'ingénieur</option>
+                            <option value="Normes_marocaines">Normes marocaines</option>
+                            <option value="Insertion_professionnells">Insertion professionnells</option>
+                            <option value="Anciens_concours_de_l'Etat">Anciens concours de l'Etat</option>
+                            <option value="QHSE">QHSE</option>
+                            <option value="Normes_et_référentiels">Normes et référentiels</option>
+                            <option value="Gestion_de_projet">Gestion de projet</option>
+                            <option value="Procédés_de_fabrication">Procédés de fabrication</option>
+                            <option value="MSDA">MSDA</option>
+                            <option value="GBPF">GBPF</option>
+                        </select>
                     </div>
                     <div className="addProductItem">
                         <label>Author</label>

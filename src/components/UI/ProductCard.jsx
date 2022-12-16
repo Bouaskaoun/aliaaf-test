@@ -20,16 +20,16 @@ const ProductCard = ({ item }) => {
             </div>
             <div className="p-2 product__info">
                 <h3 className='product__name'>
-                    {item.title}
+                    {item.title.length < 17 ? item.title : item.title.substring(0, 14) + '...'}
                     {/* <Link to={`/shop/${item._id}`}>{item.title}</Link> */}
                 </h3>
-                <span>{item.category}</span>
+                <span>{item.category.length < 14 ? item.category : item.category.substring(0,12) + '...'}</span>
             </div>
             <div className="product__card-bottom d-flex align-items-center justify-content-between p-2">
-                <span className='price'>{item.author}</span>
-                <motion.span whileTap={{ scale: 1.2 }} >
+                <span className='price'>{item.author.length < 14 ? item.author : item.author.substring(0,12) + '...'}</span>
+                {/* <motion.span whileTap={{ scale: 1.2 }} >
                     <i className="ri-download-line"></i>
-                </motion.span>
+                </motion.span> */}
             </div>
         </div>
     </Col>

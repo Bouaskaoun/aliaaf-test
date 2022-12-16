@@ -39,9 +39,22 @@
     padding: 10px;
 }
 
-.newUserItem > input[type="text"] {
-  border: 1px solid gray;
-  border-radius: 5px;
+.newUserItem > input[type="text"], input[type="password"], input[type="email"] {
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.newUserGender > label {
+    font-size: 14px;
+    color: #555;
+}
+
+.newUserGender > label > input[type="radio"] {
+    margin-right: 10px;
+}
+
+.newUserGender > label > input[type="radio"]:first-child {
+    margin-left: 10px;
 }
 
 .newUserSelect{

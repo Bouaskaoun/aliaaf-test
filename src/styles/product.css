@@ -170,6 +170,17 @@
   .addProductItem > input {
     padding: 10px;
   }
+
+  .addProductItem > input[type="text"] {
+    border: 1px solid gray;
+    border-radius: 5px;
+  }
+
+  .addProductItem > textarea {
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+  }
   
   .addProductItem > select {
     padding: 10px;

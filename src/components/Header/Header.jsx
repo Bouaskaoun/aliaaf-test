@@ -4,12 +4,12 @@ import {motion} from 'framer-motion'
 import { Container, Row } from 'reactstrap';
 import { useDispatch, useSelector } from "react-redux";
 
-
-import './header.css';
 import logo from '../../assets/images/ALIAAF LOGO v1.png';
 import userIcon from '../../assets/images/user-icon.png';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { logoutSuccess } from '../../redux/userRedux';
+import './header.css';
 
 const nav__links = [
   {
@@ -44,9 +44,8 @@ const Header = () => {
   const logout = () => {
     localStorage.removeItem('persist:root');
     dispatch(logoutSuccess());
-  
-    navigate('/login');
     toast.success('Logged out')
+    navigate('/login');
   }
 
   useEffect(()=>{
@@ -60,6 +59,7 @@ const Header = () => {
 
   return (
     <header className="header" ref={headerRef}>
+      <ToastContainer />
       <Container>
         <Row>
           <div className="nav__wrapper">

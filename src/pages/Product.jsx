@@ -1,9 +1,11 @@
 import { Link, useParams } from "react-router-dom";
-import "../styles/product.css";
 import { useState, useEffect } from "react";
 import { publicRequest, userRequest } from "../requestMethods";
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { storage } from '../firebase.config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import "../styles/product.css";
 
 export default function Product() {
     
@@ -19,16 +21,18 @@ export default function Product() {
 
     useEffect(() => {
         const getProduct = async () => {
-        try {
-            const res = await publicRequest.get(`products/find/${id}`);
-            //setData(res.data);
-            setTitle(res.data.title)
-            setCategory(res.data.category)
-            setAuthor(res.data.author)
-            setDesc(res.data.desc)
-            setImg(res.data.img)
-            setPdf(res.data.pdf)
-        } catch (err) {}
+            try {
+                const res = await publicRequest.get(`products/find/${id}`);
+                //setData(res.data);
+                setTitle(res.data.title)
+                setCategory(res.data.category)
+                setAuthor(res.data.author)
+                setDesc(res.data.desc)
+                setImg(res.data.img)
+                setPdf(res.data.pdf)
+            } catch (err) {
+                console.log(err);
+            }
         };
         getProduct();
     }, [id]);
@@ -44,18 +48,19 @@ export default function Product() {
         const uploadTaskPdf = uploadBytesResumable(storagePdfRef, pdf);
         const imgUrl = await getDownloadURL(uploadTaskImg.snapshot.ref);
         const pdfUrl = await getDownloadURL(uploadTaskPdf.snapshot.ref);
-        try {
-            await userRequest.put(`products/${id}`, {
-                title: title,
-                category: category,
-                author: author,
-                desc: desc,
-                img: imgUrl.includes('undefined') ? img : imgUrl,
-                pdf: pdfUrl.includes('undefined') ? pdf : pdfUrl
-            })
-        } catch (err) {
-            console.log(err)
-        }
+        
+        await userRequest.put(`products/${id}`, {
+            title: title,
+            category: category,
+            author: author ? author : 'Anonymous',
+            desc: desc ? desc : 'No description',
+            img: imgUrl.includes('undefined') ? img : imgUrl,
+            pdf: pdfUrl.includes('undefined') ? pdf : pdfUrl
+        }).then(() => {
+            toast.success('Product Updated')
+        }).catch((err) => {
+            toast.error('product not updated')
+        })
     }
     
   return (
@@ -66,7 +71,7 @@ export default function Product() {
                 <button className="productAddButton">Create</button>
             </Link>
         </div>
-        <div className="productTop">
+        {/* <div className="productTop">
             <div className="productTopRight">
                 <div className="productInfo">
                     <div className="productInfoLeft">
@@ -88,8 +93,6 @@ export default function Product() {
                             </div>
                         </div>
                     </div>
-                
-                
                     <div className="productInfoRight">
                         <div className="productUpload">
                             <img src={img} alt="" className="productUploadImg" />
@@ -97,69 +100,69 @@ export default function Product() {
                     </div>
                 </div>
             </div>
+        </div> */}
+        <div className="productBottom">
+            <div className="newProduct">
+                <h1 className="addProductTitle">Update Product</h1>
+                <form className="addProductForm" onSubmit={updateProduct}>
+                    <div className="addProductItem">
+                        <label>Title</label>
+                        <input 
+                        type='text' 
+                        placeholder={title}
+                        value={title}
+                        onChange={e => setTitle(e.target.value)} 
+                        />
+                    </div>
+                    <div className="addProductItem">
+                        <label>Category</label>
+                        <input 
+                        type='text' 
+                        placeholder={category}
+                        value={category}
+                        onChange={e => setCategory(e.target.value)} 
+                        />
+                    </div>
+                    <div className="addProductItem">
+                        <label>Author</label>
+                        <input 
+                        type='text'
+                        placeholder={author}
+                        value={author}
+                        onChange={e => setAuthor(e.target.value)} 
+                        />
+                    </div>
+                    <div className="addProductItem">
+                        <label>Description</label>
+                        <textarea 
+                        name="desc"
+                        rows="10"
+                        cols="66"
+                        placeholder={desc}
+                        value={desc}
+                        onChange={e => setDesc(e.target.value)} 
+                        />
+                    </div>
+                    <div className="addProductItem">
+                        <label>Image</label>
+                        <input 
+                        type="file" 
+                        accept="image/png, image/jpeg"
+                        onChange={e => setImg(e.target.files[0]) }
+                        />
+                    </div>
+                    <div className="addProductItem">
+                        <label>PDF</label>
+                        <input 
+                        type='file'
+                        accept=".pdf"
+                        onChange={e => setPdf(e.target.files[0] ? e.target.files[0] : pdf)} 
+                        />
+                    </div>
+                    <button type='submit' className="productButton">Update</button>
+                </form>
+            </div>
         </div>
-      <div className="productBottom">
-        <div className="newProduct">
-            <h1 className="addProductTitle">Update Product</h1>
-            <form className="addProductForm" onSubmit={updateProduct}>
-                <div className="addProductItem">
-                    <label>Title</label>
-                    <input 
-                    type='text' 
-                    placeholder={title}
-                    value={title}
-                    onChange={e => setTitle(e.target.value)} 
-                    />
-                </div>
-                <div className="addProductItem">
-                    <label>Category</label>
-                    <input 
-                    type='text' 
-                    placeholder={category}
-                    value={category}
-                    onChange={e => setCategory(e.target.value)} 
-                    />
-                </div>
-                <div className="addProductItem">
-                    <label>Author</label>
-                    <input 
-                    type='text'
-                    placeholder={author}
-                    value={author}
-                    onChange={e => setAuthor(e.target.value)} 
-                    />
-                </div>
-                <div className="addProductItem">
-                    <label>Description</label>
-                    <textarea 
-                    name="desc"
-                    rows="10"
-                    cols="66"
-                    placeholder={desc}
-                    value={desc}
-                    onChange={e => setDesc(e.target.value)} 
-                    />
-                </div>
-                <div className="addProductItem">
-                    <label>Image</label>
-                    <input 
-                    type="file" 
-                    accept="image/png, image/jpeg"
-                    onChange={e => setImg(e.target.files[0]) }
-                    />
-                </div>
-                <div className="addProductItem">
-                    <label>PDF</label>
-                    <input 
-                    type='file'
-                    accept=".pdf"
-                    onChange={e => setPdf(e.target.files[0] ? e.target.files[0] : pdf)} 
-                    />
-                </div>
-                <button type='submit' className="productButton">Update</button>
-            </form>
-        </div>
-      </div>
     </div>
   );
 }

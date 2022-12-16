@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import { Container, Row, Col, Form, FormGroup } from 'reactstrap';
 import Helmet from '../components/Helmet/Helmet';
-import { Link } from 'react-router-dom';
 import { login } from "../redux/apiCalls";
 import { useDispatch } from "react-redux";
 import { toast } from 'react-toastify';
-
+import 'react-toastify/dist/ReactToastify.css';
 import '../styles/login.css'
 
 const Login = () => {
@@ -15,39 +14,18 @@ const Login = () => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
 
-  //const navigate = useNavigate()
-
-  // const signIn = async (e)=>{
-  //   e.preventDefault()
-  //   setLoading(true)
-
-  //   try {
-  //     const userCredential = await signInWithEmailAndPassword(auth,email,password)
-  //     // eslint-disable-next-line  
-  //     const user = userCredential.user
-  //     setLoading(false)
-  //     toast.success('Successfully logged In')
-  //     navigate('/home')
-
-  //   } catch (error) {
-  //     setLoading(false)
-  //     toast.error(error.message)
-  //   }
-  // }
-
-  //const { isFetching, error } = useSelector((state) => state.user);
-
   const handleClick = (e) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      login(dispatch, { username, password });
-      setLoading(false)
-      toast.success('Successfully logged In')
-    } catch (error) {
-      setLoading(false)
-      toast.error(error.message)
-    }
+    login(dispatch, { username, password })
+      .then((res) => {
+        setLoading(false)
+        toast.success('Successfully logged In')
+      })
+      .catch (error => {
+        setLoading(false)
+        toast.error(error)
+      })
   };
 
   return (
@@ -81,13 +59,13 @@ const Login = () => {
                       />
                     </FormGroup>
                     <button type='submit' className='auth__btn'>Login</button>
-                    <p>Don't have an account? <Link to='/signup'>Create an account</Link></p>
                   </Form>
                 </Col>
               )
             }
           </Row>
         </Container>
+
       </section>
     </Helmet>
   )

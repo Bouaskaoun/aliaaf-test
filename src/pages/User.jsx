@@ -6,9 +6,11 @@ import {
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { userRequest } from "../requestMethods";
-import "../styles/user.css";
 
 import userIcon from '../assets/images/user-icon.png'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import "../styles/user.css";
   
   export default function User() {    
     
@@ -20,38 +22,31 @@ import userIcon from '../assets/images/user-icon.png'
     //const [password, setPassword] = useState('')
 
     useEffect(() => {
-        const getUser = async () => {
+      const getUser = async () => {
         try {
-            const res = await userRequest.get(`users/find/${id}`);
-            //setData(res.data);
-            setUsername(res.data.username)
-            setEmail(res.data.email)
-            setIsAdmin(res.data.isAdmin)
-        } catch (err) {}
-        };
-        getUser();
+          const res = await userRequest.get(`users/find/${id}`);
+          //setData(res.data);
+          setUsername(res.data.username)
+          setEmail(res.data.email)
+          setIsAdmin(res.data.isAdmin)
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      getUser();
     }, [id]);
 
     const handleUpdate = async (e) => {
         e.preventDefault()
-        // const addpassword = password === '' ? 'empty' : 'not empty'
-        // const updatedUser = addpassword === 'empty' ? {
-        //   username: username,
-        //   email: email,
-        //   isAdmin: isAdmin
-        // } : {
-        //   username: username,
-        //   email: email,
-        //   isAdmin: isAdmin,
-        //   password: password
-        // }
-        try {
-          await userRequest.put(`users/${id}`, {
-            username: username,
-            email: email,
-            isAdmin: isAdmin
-          })
-        } catch (err) {}
+        await userRequest.put(`users/${id}`, {
+          username: username,
+          email: email,
+          isAdmin: isAdmin
+        }).then(() => {
+          toast.success('User has been updated')
+        }).catch((err) => {
+          toast.error('User has not been updated')
+        })
     }
     
     return (

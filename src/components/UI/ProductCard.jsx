@@ -12,7 +12,7 @@ const ProductCard = ({ item }) => {
   return (
     <Col lg='3' md='4' className="mb-2">
         <div className="product__item" onClick={()=> {
-                navigate(`/shop/${item._id}`)
+                navigate(`/books/${item._id}`)
                 window.location.reload(false)
                 }}>
             <div className="product__img">

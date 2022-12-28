@@ -17,7 +17,7 @@ const nav__links = [
     display:'Home'
   },
   {
-    path:'shop',
+    path:'books',
     display:'Books'
   }
 ]

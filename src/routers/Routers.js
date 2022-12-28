@@ -38,7 +38,7 @@ const Routers = () => {
         }
       />
       <Route 
-        path='shop/:id' 
+        path='books/:id' 
         element={
           <ProtectedRoute>
             <ProductDetails />
@@ -46,7 +46,7 @@ const Routers = () => {
         }
       />
       <Route 
-        path='shop'
+        path='books'
         element={
           <ProtectedRoute>
             <Shop />

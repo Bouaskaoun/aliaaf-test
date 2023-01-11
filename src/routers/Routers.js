@@ -23,14 +23,14 @@ const Routers = () => {
     <Routes>
       <Route path='/' element={<Navigate to ='home' />} />
       <Route path='home' element={<Home />}/>
-      <Route path='products' element={<ProductList />}/>
+      <Route path='booksList' element={<ProductList />}/>
       <Route path='users' element={<Users />}/>
       <Route path='newUser' element={<NewUser />}/>
       <Route path='user/:id' element={<User />}/>
       <Route path='product/:id' element={<Product />}/>
       <Route path='login' element={user ? <Navigate to="/" /> : <Login />}/>
       <Route 
-        path='addProducts'
+        path='addBooks'
         element={
           <ProtectedRoute>
             <AddProducts />

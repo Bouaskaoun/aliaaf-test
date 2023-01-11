@@ -148,12 +148,12 @@ const AddProducts = () => {
   }
 
   return (
-    <Helmet title='AddProduct'>
+    <Helmet title='AddBooks'>
       <section>
         <Container>
           <Row>
             <Col lg='6' className='m-auto'>
-              <h3 className='fw-bold mb-4'>Add Product</h3>              
+              <h3 className='fw-bold mb-4'>Add Books</h3>              
               <div className="newUser">
                 <Form className='newUserForm' onSubmit={addProduct}>
                   <FormGroup className='newUserItem'>
@@ -217,7 +217,7 @@ const AddProducts = () => {
                       onChange={e => setPdf(e.target.files[0])} 
                       />
                   </FormGroup>
-                  <button type='submit' className='newUserButton'>Create a Product</button>
+                  <button type='submit' className='newUserButton'>Create a Book</button>
                 </Form>
               </div>
             </Col>

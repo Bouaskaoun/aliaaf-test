@@ -4,6 +4,7 @@ import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { publicRequest, userRequest } from "../requestMethods";
+import Helmet from "../components/Helmet/Helmet";
 
 export default function ProductList() {
 
@@ -30,7 +31,7 @@ export default function ProductList() {
     { field: "_id", headerName: "ID", width: 200 },
     {
       field: "title",
-      headerName: "Product",
+      headerName: "Book Title",
       width: 200,
       // renderCell: (params) => {
       //   return (
@@ -73,29 +74,31 @@ export default function ProductList() {
   ];
 
   return (
-    <div className="Container">
-      <div className="productList">
-        <div className="userTitleContainer">
-          <h1 className="userTitle">Products Lists</h1>
-          <Link to="/addProducts">
-            <button className="userAddButton">Create</button>
-          </Link>
-        </div>
-        <DataGrid
-          getRowId={(row) => row._id}
-          rows={data}
-          columns={columns}
-          disableColumnSelector = {true}
-          // disable sorting
-          disableColumnMenu
-          // disable selection
+    <Helmet title='Books List'>
+      <div className="Container">
+        <div className="productList">
+          <div className="userTitleContainer">
+            <h1 className="userTitle">Books List</h1>
+            <Link to="/addBooks">
+              <button className="userAddButton">Create</button>
+            </Link>
+          </div>
+          <DataGrid
+            getRowId={(row) => row._id}
+            rows={data}
+            columns={columns}
+            disableColumnSelector = {true}
+            // disable sorting
+            disableColumnMenu
+            // disable selection
 
-          
-          disableSelectionOnClick
-          pageSize={8}
-          autoHeight
-        />
+            
+            disableSelectionOnClick
+            pageSize={8}
+            autoHeight
+          />
+        </div>
       </div>
-    </div>
+    </Helmet>  
   );
 }

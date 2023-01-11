@@ -58,8 +58,8 @@ const Shop = () => {
   }
 
   return (
-    <Helmet title='Shop'>
-      <CommonSection title='Products' />
+    <Helmet title='Books'>
+      <CommonSection title='Books' />
       <section>
         <Container>
           <Row>
@@ -109,7 +109,7 @@ const Shop = () => {
           <Row>
             {
               productsData.length === 0 ? (
-                <h1 className='text-center fs-4'>No products are found</h1>
+                <h1 className='text-center fs-4'>No books are found</h1>
               ) : (
                 <ProductsList data={productsData} />
               )

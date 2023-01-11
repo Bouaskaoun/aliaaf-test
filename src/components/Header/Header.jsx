@@ -106,7 +106,7 @@ const Header = () => {
                         {
                           user.isAdmin && (
                             <>
-                            <Link to='/products'>Products</Link>
+                            <Link to='/booksList'>Books List</Link>
                             <Link to='/users'>Users</Link>
                             </>
                           )

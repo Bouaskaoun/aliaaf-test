@@ -90,7 +90,7 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg='12' className='text-center mb-5'>
-              <h2 className='section__title'>Products</h2>
+              <h2 className='section__title'>Books</h2>
             </Col>
             <ProductsList data={filterdProducts}/>
           </Row>

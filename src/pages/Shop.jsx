@@ -24,15 +24,30 @@ const Shop = () => {
     getProducts();
   }, []);
 
-  const handleFilter = (value) => {
-    if(value === 'reset'){
-      setProductsData(products)
-    }
-    else{
-      const filterProducts = products.filter(item => item.category === value)
-      setProductsData(filterProducts)
-    }
-  }
+  // const handleFilter = (value) => {
+  //   if(value === 'reset'){
+  //     setProductsData(products)
+  //   }
+  //   else{
+  //     const filterProducts = products.filter(item => item.category === value)
+  //     setProductsData(filterProducts)
+  //   }
+  // }
+
+  // const handleSort = (e) => {
+  //   const sortValue = e.target.value
+  //   if(sortValue === 'ascending'){
+  //     const sortedProducts = [...products].sort((a, b) => a.title > b.title ? 1 : -1)
+  //     setProductsData(sortedProducts)
+  //   }
+  //   if(sortValue === 'descending'){
+  //     const sortedProducts = [...products].sort((a, b) => a.title > b.title ? -1 : 1)
+  //     setProductsData(sortedProducts)
+  //   }
+  //   if(sortValue === 'reset'){
+  //     setProductsData(products)
+  //   }
+  // }
 
   const handleSearch = (e) => {
     const searchTerm = e.target.value
@@ -42,21 +57,6 @@ const Shop = () => {
     setProductsData(searchProducts)
   }
 
-  const handleSort = (e) => {
-    const sortValue = e.target.value
-    if(sortValue === 'ascending'){
-      const sortedProducts = [...products].sort((a, b) => a.title > b.title ? 1 : -1)
-      setProductsData(sortedProducts)
-    }
-    if(sortValue === 'descending'){
-      const sortedProducts = [...products].sort((a, b) => a.title > b.title ? -1 : 1)
-      setProductsData(sortedProducts)
-    }
-    if(sortValue === 'reset'){
-      setProductsData(products)
-    }
-  }
-
   return (
     <Helmet title='Books'>
       <CommonSection title='Books' />
@@ -64,7 +64,7 @@ const Shop = () => {
         <Container>
           <Row>
             <Col lg='3' md='6'>
-              <div className="filter__widget">
+              {/* <div className="filter__widget">
                 <select onChange={e => handleFilter(e.target.value)}>
                   <option value="reset">Filter By Category</option>
                   <option value="Textes_réglementaires">Textes réglementaires</option>
@@ -82,16 +82,16 @@ const Shop = () => {
                   <option value="MSDA">MSDA</option>
                   <option value="GBPF">GBPF</option>
                 </select>
-              </div>
+              </div> */}
             </Col>
             <Col lg='3' md='6' className='text-end'>
-              <div className="filter__widget">
+              {/* <div className="filter__widget">
                 <select onChange={handleSort}>
                   <option value="reset">Sort By</option>
                   <option value="ascending">Ascending</option>
                   <option value="descending">Descending</option>
                 </select>
-              </div>
+              </div> */}
             </Col>
             <Col lg='6' md='12'>
               <div className="search__box">
@@ -100,6 +100,24 @@ const Shop = () => {
                   <i className="ri-search-line"></i>
                 </span>
               </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col lg='12'>
+              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products)}>Tous les Documents</button>
+              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'Textes_réglementaires'))}>Textes réglementaires</button>
+              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'PFE'))}>PFE</button>
+              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'Management_de_la_Production'))}>Management de la Production</button>
+              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'Articles_scientifiques'))}>Articles scientifiques</button>
+              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'Normes_marocaines'))}>Normes marocaines</button>
+              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'Insertion_professionnells'))}>Insertion professionnells</button>
+              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === "Anciens_concours_de_l'Etat"))}>Anciens concours de l'Etat</button>
+              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'QHSE'))}>QHSE</button>
+              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'Normes_et_référentiels'))}>Normes et référentiels</button>
+              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'Gestion_de_projet'))}>Gestion de projet</button>
+              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'Procédés_de_fabrication'))}>Procédés de fabrication</button>
+              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'MSDA'))}>MSDA</button>
+              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'GBPF'))}>GBPF</button>
             </Col>
           </Row>
         </Container>

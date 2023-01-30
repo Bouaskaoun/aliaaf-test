@@ -4,41 +4,43 @@ import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { userRequest } from "../requestMethods";
+import Helmet from "../components/Helmet/Helmet";
 
 export default function Users() {
-    const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
 
-    useEffect(() => {
-      const getUsers = async () => {
-        try {
-          const res = await userRequest.get("users");
-          setData(res.data);
-        } catch (err) {}
-      };
-      getUsers();
-    }, []);
-
-    const handleDelete = (id) => {
+  useEffect(() => {
+    const getUsers = async () => {
       try {
-        userRequest.delete("users/" + id)
-        .then(() => userRequest.get("users").then(res => setData(res.data)));
+        const res = await userRequest.get("users");
+        setData(res.data);
       } catch (err) {}
     };
-  
+    getUsers();
+  }, []);
+
+  const handleDelete = (id) => {
+    try {
+      userRequest
+        .delete("users/" + id)
+        .then(() => userRequest.get("users").then((res) => setData(res.data)));
+    } catch (err) {}
+  };
+
   const columns = [
     { field: "_id", headerName: "ID", width: 200 },
     {
       field: "username",
       headerName: "User",
       width: 200,
-    //   renderCell: (params) => {
-    //     return (
-    //       <div className="userListUser">
-    //         <img className="userListImg" src={params.row.avatar} alt="" />
-    //         {params.row.username}
-    //       </div>
-    //     );
-    //   },
+      //   renderCell: (params) => {
+      //     return (
+      //       <div className="userListUser">
+      //         <img className="userListImg" src={params.row.avatar} alt="" />
+      //         {params.row.username}
+      //       </div>
+      //     );
+      //   },
     },
     { field: "email", headerName: "Email", width: 200 },
     {
@@ -67,21 +69,25 @@ export default function Users() {
   ];
 
   return (
-    <div className="userList">
-      <div className="userTitleContainer">
-        <h1 className="userTitle">Users Lists</h1>
-        <Link to="/newUser">
-          <button className="userAddButton">Create</button>
-        </Link>
+    <Helmet title="Users List">
+      <div className="Container">
+        <div className="userList">
+          <div className="userTitleContainer">
+            <h1 className="userTitle">Users Lists</h1>
+            <Link to="/newUser">
+              <button className="userAddButton">Create</button>
+            </Link>
+          </div>
+          <DataGrid
+            getRowId={(row) => row._id}
+            rows={data}
+            disableSelectionOnClick
+            columns={columns}
+            pageSize={8}
+            autoHeight
+          />
+        </div>
       </div>
-      <DataGrid
-        getRowId={(row) => row._id}
-        rows={data}
-        disableSelectionOnClick
-        columns={columns}
-        pageSize={8}
-        autoHeight
-      />
-    </div>
+    </Helmet>
   );
 }

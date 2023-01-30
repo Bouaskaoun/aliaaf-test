@@ -38,6 +38,10 @@
     color: var(--primary-color);
 }
 
+img {
+    width: 100%;
+  }
+
 @media only screen and (max-width: 768px) {
     .filter__widget {
         margin-bottom: 30px;

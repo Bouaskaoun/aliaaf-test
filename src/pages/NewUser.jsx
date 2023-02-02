@@ -32,12 +32,12 @@ export default function NewUser() {
 
   return (
     <Helmet title="AddUser">
-      <section>
+      <section className="bac">
         <Container>
           <Row>
             <Col lg="6" className="m-auto">
               <div className="newUser">
-                <h1 className="newUserTitle">New User</h1>
+                <h1 className="newUserTitle">Ajouter un utilisateur</h1>
                 {/* <form className="newUserForm" onSubmit={addUser}>
                   <div className="newUserItem">
                     <label>Username</label>

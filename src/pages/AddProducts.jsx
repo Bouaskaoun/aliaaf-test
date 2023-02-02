@@ -164,11 +164,11 @@ const AddProducts = () => {
 
   return (
     <Helmet title="AddBooks">
-      <section>
+      <section className="bac">
         <Container>
           <Row>
             <Col lg="6" className="m-auto">
-              <h3 className="fw-bold mb-4">Add Books</h3>
+              <h3 className="fw-bold mb-4">Ajouter un document</h3>
               <div className="newUser">
                 {/* <Form className="newUserForm" onSubmit={addProduct}>
                   <FormGroup className="newUserItem">

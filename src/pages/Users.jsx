@@ -71,11 +71,11 @@ export default function Users() {
   return (
     <Helmet title="Users List">
       <div className="Container">
-        <div className="userList">
+        <div className="userList bac">
           <div className="userTitleContainer">
-            <h1 className="userTitle">Users Lists</h1>
+            <h1 className="userTitle">liste des utilisateurs</h1>
             <Link to="/newUser">
-              <button className="userAddButton">Create</button>
+              <button className="userAddButton">Ajouter</button>
             </Link>
           </div>
           <DataGrid

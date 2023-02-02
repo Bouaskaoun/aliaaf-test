@@ -7,7 +7,6 @@ import { publicRequest, userRequest } from "../requestMethods";
 import Helmet from "../components/Helmet/Helmet";
 
 export default function ProductList() {
-
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -22,8 +21,11 @@ export default function ProductList() {
 
   const handleDelete = (id) => {
     try {
-      userRequest.delete("products/" + id)
-      .then(() => publicRequest.get("products").then(res => setData(res.data)));
+      userRequest
+        .delete("products/" + id)
+        .then(() =>
+          publicRequest.get("products").then((res) => setData(res.data))
+        );
     } catch (err) {}
   };
 
@@ -74,31 +76,30 @@ export default function ProductList() {
   ];
 
   return (
-    <Helmet title='Books List'>
+    <Helmet title="Books List">
       <div className="Container">
-        <div className="productList">
+        <div className="productList bac">
           <div className="userTitleContainer">
-            <h1 className="userTitle">Books List</h1>
+            <h1 className="userTitle">liste des documents</h1>
             <Link to="/addBooks">
-              <button className="userAddButton">Create</button>
+              <button className="userAddButton">Ajouter</button>
             </Link>
           </div>
           <DataGrid
             getRowId={(row) => row._id}
             rows={data}
             columns={columns}
-            disableColumnSelector = {true}
+            disableColumnSelector={true}
             // disable sorting
             disableColumnMenu
             // disable selection
 
-            
             disableSelectionOnClick
             pageSize={8}
             autoHeight
           />
         </div>
       </div>
-    </Helmet>  
+    </Helmet>
   );
 }

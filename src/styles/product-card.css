@@ -1,4 +1,4 @@
-.product__item {
+/* .product__item {
     box-shadow: 0 0 20px #aaa;
     cursor: pointer;
 }
@@ -46,4 +46,29 @@
     .product__card-bottom span i {
         font-size: 1rem;
     }
+} */
+
+
+/* 
+---------------------------------------------
+blog
+--------------------------------------------- 
+*/
+.blog-post-thumb {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+.blog-post-thumb.big .img {
+height: 400px;
 }
+
+.blog-post-thumb .img {
+overflow: hidden;
+border-radius: 20px;
+position: relative;
+}
+
+img {
+    width: 100%;
+}  

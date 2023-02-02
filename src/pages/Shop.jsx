@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import Helmet from "../components/Helmet/Helmet";
+import { Container, Row } from "reactstrap";
 
-import CommonSection from '../components/UI/CommonSection';
-import Helmet from '../components/Helmet/Helmet';
-import { Container, Row, Col } from 'reactstrap';
-
-import ProductsList from '../components/UI/ProductsList';
-import { publicRequest } from '../requestMethods';
-import '../styles/shop.css';
+import ProductsList from "../components/UI/ProductsList";
+import { publicRequest } from "../requestMethods";
+import "../styles/shop.css";
 
 const Shop = () => {
-
-  const [products, setProducts] = useState([])
-  const [productsData, setProductsData] = useState([])
+  const [products, setProducts] = useState([]);
+  const [productsData, setProductsData] = useState([]);
+  const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -50,93 +48,282 @@ const Shop = () => {
   // }
 
   const handleSearch = (e) => {
-    const searchTerm = e.target.value
+    const searchTerm = e.target.value;
 
-    const searchProducts = products.filter(item => item.title?.toLowerCase().includes(searchTerm.toLowerCase()))
+    const searchProducts = products.filter((item) =>
+      item.title?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
-    setProductsData(searchProducts)
-  }
+    setProductsData(searchProducts);
+  };
+
+  const toggleFilters = () => {
+    setShowFilters(!showFilters);
+  };
+
+  const handleFilter = (value) => {
+    if (value === "reset") {
+      setProductsData(products);
+    } else {
+      const filterProducts = products.filter((item) => item.category === value);
+      setProductsData(filterProducts);
+    }
+    setShowFilters(false);
+  };
 
   return (
-    <Helmet title='Books'>
-      <CommonSection title='Books' />
-      <section>
-        <Container>
-          <Row>
-            <Col lg='3' md='6'>
-              {/* <div className="filter__widget">
-                <select onChange={e => handleFilter(e.target.value)}>
-                  <option value="reset">Filter By Category</option>
-                  <option value="Textes_réglementaires">Textes réglementaires</option>
-                  <option value="PFE">PFE</option>
-                  <option value="Management_de_la_Production">Management de la Production</option>
-                  <option value="Articles_scientifiques">Articles scientifiques</option>
-                  <option value="Techniques_de_l'ingénieur">Techniques de l'ingénieur</option>
-                  <option value="Normes_marocaines">Normes marocaines</option>
-                  <option value="Insertion_professionnells">Insertion professionnells</option>
-                  <option value="Anciens_concours_de_l'Etat">Anciens concours de l'Etat</option>
-                  <option value="QHSE">QHSE</option>
-                  <option value="Normes_et_référentiels">Normes et référentiels</option>
-                  <option value="Gestion_de_projet">Gestion de projet</option>
-                  <option value="Procédés_de_fabrication">Procédés de fabrication</option>
-                  <option value="MSDA">MSDA</option>
-                  <option value="GBPF">GBPF</option>
-                </select>
-              </div> */}
-            </Col>
-            <Col lg='3' md='6' className='text-end'>
-              {/* <div className="filter__widget">
-                <select onChange={handleSort}>
-                  <option value="reset">Sort By</option>
-                  <option value="ascending">Ascending</option>
-                  <option value="descending">Descending</option>
-                </select>
-              </div> */}
-            </Col>
-            <Col lg='6' md='12'>
-              <div className="search__box">
-                <input type="text" placeholder='Search...' onChange={handleSearch} />
-                <span>
-                  <i className="ri-search-line"></i>
-                </span>
+    <Helmet title="Books">
+      <section className="section biblio">
+        <div className="container">
+          <div className="row">
+            <div className="bac">
+              <div className="text-container">
+                <h1 className="h1-large">ALIAAF BIBLIOTHÈQUE</h1>
+                <p className="p-large">
+                  Association des Ingénieurs Agroalimentaires Lauréats de la Fst
+                  de Fès
+                </p>
+                <div className="search__box">
+                  <input
+                    type="text"
+                    className="form-control-input"
+                    placeholder="Search..."
+                    onChange={handleSearch}
+                  />
+                </div>
+                <button className="btn-solid-lg" onClick={toggleFilters}>
+                  filtrer par catégorie
+                </button>
               </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col lg='12'>
-              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products)}>Tous les Documents</button>
-              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'Textes_réglementaires'))}>Textes réglementaires</button>
-              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'PFE'))}>PFE</button>
-              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'Management_de_la_Production'))}>Management de la Production</button>
-              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'Articles_scientifiques'))}>Articles scientifiques</button>
-              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'Normes_marocaines'))}>Normes marocaines</button>
-              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'Insertion_professionnells'))}>Insertion professionnells</button>
-              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === "Anciens_concours_de_l'Etat"))}>Anciens concours de l'Etat</button>
-              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'QHSE'))}>QHSE</button>
-              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'Normes_et_référentiels'))}>Normes et référentiels</button>
-              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'Gestion_de_projet'))}>Gestion de projet</button>
-              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'Procédés_de_fabrication'))}>Procédés de fabrication</button>
-              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'MSDA'))}>MSDA</button>
-              <button className='btn btn-secondary m-2' onClick={() => setProductsData(products.filter(item => item.category === 'GBPF'))}>GBPF</button>
-            </Col>
-          </Row>
-        </Container>
+            </div>
+          </div>
+
+          {showFilters && (
+            <div className="filters">
+              <div className="container">
+                <div className="row">
+                  <div className="col-lg-12">
+                    <div className="filter">
+                      <div className="filter-icon bg-4">
+                        <i className="fas fa-dot-circle"></i>
+                      </div>
+                      <div className="filter-body">
+                        <h5
+                          className="filter-title"
+                          onClick={() => handleFilter("reset")}
+                        >
+                          Tous les Documents
+                        </h5>
+                      </div>
+                    </div>
+
+                    <div className="filter">
+                      <div className="filter-icon bg-1">
+                        <i
+                          className="fas fa-gavel"
+                          onClick={() => handleFilter("Textes_réglementaires")}
+                        ></i>
+                      </div>
+                      <div className="filter-body">
+                        <h5 className="filter-title">Textes réglementaires</h5>
+                      </div>
+                    </div>
+
+                    <div className="filter">
+                      <div className="filter-icon bg-2">
+                        <i className="fas fa-graduation-cap"></i>
+                      </div>
+                      <div className="filter-body">
+                        <h5
+                          className="filter-title"
+                          onClick={() => handleFilter("PFE")}
+                        >
+                          PFE
+                        </h5>
+                      </div>
+                    </div>
+
+                    <div className="filter">
+                      <div className="filter-icon bg-3">
+                        <i className="fas fa-gear"></i>
+                      </div>
+                      <div className="filter-body">
+                        <h5
+                          className="filter-title"
+                          onClick={() =>
+                            handleFilter("Management_de_la_Production")
+                          }
+                        >
+                          Management de la Production
+                        </h5>
+                      </div>
+                    </div>
+
+                    <div className="filter">
+                      <div className="filter-icon bg-4">
+                        <i className="fas fa-newspaper"></i>
+                      </div>
+                      <div className="filter-body">
+                        <h5
+                          className="filter-title"
+                          onClick={() => handleFilter("Articles_scientifiques")}
+                        >
+                          Articles scientifiques
+                        </h5>
+                      </div>
+                    </div>
+
+                    <div className="filter">
+                      <div className="filter-icon bg-5">
+                        <i className="fas fa-check"></i>
+                      </div>
+                      <div className="filter-body">
+                        <h5
+                          className="filter-title"
+                          onClick={() => handleFilter("Normes_marocaines")}
+                        >
+                          Normes marocaines
+                        </h5>
+                      </div>
+                    </div>
+
+                    <div className="filter">
+                      <div className="filter-icon bg-1">
+                        <i className="fas fa-cogs"></i>
+                      </div>
+                      <div className="filter-body">
+                        <h5
+                          className="filter-title"
+                          onClick={() =>
+                            handleFilter("Insertion_professionnells")
+                          }
+                        >
+                          Insertion professionnelle
+                        </h5>
+                      </div>
+                    </div>
+
+                    <div className="filter">
+                      <div className="filter-icon bg-2">
+                        <i className="fas fa-clipboard"></i>
+                      </div>
+                      <div className="filter-body">
+                        <h5
+                          className="filter-title"
+                          onClick={() =>
+                            handleFilter("Anciens_concours_de_l'Etat")
+                          }
+                        >
+                          Anciens concours de l'Etat
+                        </h5>
+                      </div>
+                    </div>
+
+                    <div className="filter">
+                      <div className="filter-icon bg-3">
+                        <i className="fas fa-file-medical"></i>
+                      </div>
+                      <div className="filter-body">
+                        <h5
+                          className="filter-title"
+                          onClick={() => handleFilter("QHSE")}
+                        >
+                          QHSE
+                        </h5>
+                      </div>
+                    </div>
+
+                    <div className="filter">
+                      <div className="filter-icon bg-4">
+                        <i className="fas fa-folder"></i>
+                      </div>
+                      <div className="filter-body">
+                        <h5
+                          className="filter-title"
+                          onClick={() => handleFilter("Normes_et_référentiels")}
+                        >
+                          Normes et référentiels
+                        </h5>
+                      </div>
+                    </div>
+
+                    <div className="filter">
+                      <div className="filter-icon bg-5">
+                        <i className="fas fa-list-check"></i>
+                      </div>
+                      <div className="filter-body">
+                        <h5
+                          className="filter-title"
+                          onClick={() => handleFilter("Gestion_de_projet")}
+                        >
+                          Gestion de projet
+                        </h5>
+                      </div>
+                    </div>
+
+                    <div className="filter">
+                      <div className="filter-icon bg-1">
+                        <i className="fas fa-industry"></i>
+                      </div>
+                      <div className="filter-body">
+                        <h5
+                          className="filter-title"
+                          onClick={() =>
+                            handleFilter("Procédés_de_fabrication")
+                          }
+                        >
+                          Procédés de fabrication
+                        </h5>
+                      </div>
+                    </div>
+
+                    <div className="filter">
+                      <div className="filter-icon bg-2">
+                        <i className="fas fa-cogs"></i>
+                      </div>
+                      <div className="filter-body">
+                        <h5
+                          className="filter-title"
+                          onClick={() => handleFilter("MSDA")}
+                        >
+                          MSDA
+                        </h5>
+                      </div>
+                    </div>
+
+                    <div className="filter">
+                      <div className="filter-icon bg-3">
+                        <i className="fas fa-thumbs-up"></i>
+                      </div>
+                      <div className="filter-body">
+                        <h5
+                          className="filter-title"
+                          onClick={() => handleFilter("GBPF")}
+                        >
+                          GBPF
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </section>
-      <section className='pt-0'>
+      <section className="biblio pt-5">
         <Container>
           <Row>
-            {
-              productsData.length === 0 ? (
-                <h1 className='text-center fs-4'>No books are found</h1>
-              ) : (
-                <ProductsList data={productsData} />
-              )
-            }
+            {productsData.length === 0 ? (
+              <h1 className="text-center fs-4">No books are found</h1>
+            ) : (
+              <ProductsList data={productsData} />
+            )}
           </Row>
         </Container>
       </section>
     </Helmet>
-  )
-}
+  );
+};
 
-export default Shop
+export default Shop;

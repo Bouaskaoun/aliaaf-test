@@ -1,4 +1,4 @@
-.filter__widget select {
+/* .filter__widget select {
     padding: 8px 20px;
     border: 1px solid var(--primary-color);
     cursor: pointer;
@@ -63,4 +63,122 @@ img {
         padding: 7px 20px;
         font-size: 0.9rem;
     }
+} */
+
+
+img {
+    width: 100%;
 }
+
+.bac {
+    position: relative;
+    padding-top: 9rem;
+    background-size: cover;
+    text-align: center;
+}
+
+.biblio {
+    background-color: #fcfafb;
+}
+
+.search__box{
+    padding: 12px;
+}
+
+/********************/
+/*     filters     */
+/********************/
+.filters {
+	padding-top: 6.5rem;
+	padding-bottom: 3.25rem;
+	text-align: center;
+}
+
+.filters h5 {
+    cursor: pointer;
+}
+
+.filters .filter {
+	margin-bottom: 3.5rem;
+	border: none;
+	background-color: transparent;
+}
+
+.filters .filter-icon {
+	width: 7rem;
+	height: 7rem;
+	margin-right: auto;
+	margin-bottom: 1.5rem;
+	margin-left: auto;
+	border-radius: 0.25rem;
+}
+
+.filters .filter-icon .fas {
+	color: #ffffff;
+	font-size: 3rem;
+	line-height: 7rem;
+}
+
+.filters .filter-body {
+	padding: 0;
+}
+
+
+.bg-1 {
+	background-color: #fac702;
+}
+
+.bg-2 {
+	background-color: #886cff;
+}
+
+.bg-3 {
+	background-color: #ff3f00;
+}
+
+.bg-4 {
+	background-color: #00d563;
+}
+
+.bg-5 {
+	background-color: #fc5fa1;
+}
+
+
+/*************************/
+/*     Media Queries     */
+/*************************/	
+/* Min-width 768px */
+@media (min-width: 768px) {
+
+	/* Benefits */
+	.filters .filter {
+		display: inline-block;
+		width: 186px;
+		margin-right: 1.25rem;
+		margin-left: 1.25rem;
+		vertical-align: top;
+	}
+	/* end of  benefits */
+}
+/* end of min-width 768px */
+
+
+/* Min-width 1200px */
+@media (min-width: 1200px) {
+	
+	/* Benefits */
+	/* .filters {
+		padding-top: 14rem;
+	} */
+
+	.filters .filter:first-of-type {
+		margin-left: 0;
+	}
+
+	.filters .filter:last-of-type {
+		margin-right: 0;
+	}
+	/* end of  benefits */
+}
+/* end of min-width 1200px */

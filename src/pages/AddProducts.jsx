@@ -164,7 +164,7 @@ const AddProducts = () => {
 
   return (
     <Helmet title="AddBooks">
-      <section className="bac">
+      <section className="product">
         <Container>
           <Row>
             <Col lg="6" className="m-auto">

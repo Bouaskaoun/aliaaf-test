@@ -29,7 +29,7 @@ const Login = () => {
 
   return (
     <Helmet title="Login">
-      <section>
+      <section className="bac">
         <Container>
           <Row>
             {loading ? (

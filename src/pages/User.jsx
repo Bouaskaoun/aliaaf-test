@@ -1,55 +1,55 @@
-import {
-    MailOutline,
-    PermIdentity,
-    Publish,
-  } from "@material-ui/icons";
+import { MailOutline, PermIdentity, Publish } from "@material-ui/icons";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { userRequest } from "../requestMethods";
 
-import userIcon from '../assets/images/user-icon.png'
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import userIcon from "../assets/images/user-icon.png";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../styles/user.css";
-  
-  export default function User() {    
-    
-    const {id} = useParams()
+import Helmet from "../components/Helmet/Helmet";
 
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
-    const [isAdmin, setIsAdmin] = useState(false)
-    //const [password, setPassword] = useState('')
+export default function User() {
+  const { id } = useParams();
 
-    useEffect(() => {
-      const getUser = async () => {
-        try {
-          const res = await userRequest.get(`users/find/${id}`);
-          //setData(res.data);
-          setUsername(res.data.username)
-          setEmail(res.data.email)
-          setIsAdmin(res.data.isAdmin)
-        } catch (err) {
-          console.log(err);
-        }
-      };
-      getUser();
-    }, [id]);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+  //const [password, setPassword] = useState('')
 
-    const handleUpdate = async (e) => {
-        e.preventDefault()
-        await userRequest.put(`users/${id}`, {
-          username: username,
-          email: email,
-          isAdmin: isAdmin
-        }).then(() => {
-          toast.success('User has been updated')
-        }).catch((err) => {
-          toast.error('User has not been updated')
-        })
-    }
-    
-    return (
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const res = await userRequest.get(`users/find/${id}`);
+        //setData(res.data);
+        setUsername(res.data.username);
+        setEmail(res.data.email);
+        setIsAdmin(res.data.isAdmin);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUser();
+  }, [id]);
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    await userRequest
+      .put(`users/${id}`, {
+        username: username,
+        email: email,
+        isAdmin: isAdmin,
+      })
+      .then(() => {
+        toast.success("User has been updated");
+      })
+      .catch((err) => {
+        toast.error("User has not been updated");
+      });
+  };
+
+  return (
+    <Helmet title="User">
       <div className="user">
         <div className="userTitleContainer">
           <h1 className="userTitle">Edit User</h1>
@@ -60,14 +60,12 @@ import "../styles/user.css";
         <div className="userContainer">
           <div className="userShow">
             <div className="userShowTop">
-              <img
-                src={userIcon}
-                alt=""
-                className="userShowImg"
-              />
+              <img src={userIcon} alt="" className="userShowImg" />
               <div className="userShowTopTitle">
                 <span className="userShowUsername">{username}</span>
-                <span className="userShowUserTitle">{isAdmin ? 'Admin' : 'User'}</span>
+                <span className="userShowUserTitle">
+                  {isAdmin ? "Admin" : "User"}
+                </span>
               </div>
             </div>
             <div className="userShowBottom">
@@ -91,8 +89,8 @@ import "../styles/user.css";
                   <input
                     type="text"
                     placeholder={username}
-                    value = {username}
-                    onChange = {(e) => setUsername(e.target.value)}
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     className="userUpdateInput"
                   />
                 </div>
@@ -101,8 +99,8 @@ import "../styles/user.css";
                   <input
                     type="text"
                     placeholder={email}
-                    value = {email}
-                    onChange = {(e) => setEmail(e.target.value)}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="userUpdateInput"
                   />
                 </div>
@@ -124,7 +122,9 @@ import "../styles/user.css";
                       name="status"
                       value={true}
                       checked={isAdmin}
-                      onChange = {(e) => setIsAdmin(e.target.value === 'true' ? true : false)}
+                      onChange={(e) =>
+                        setIsAdmin(e.target.value === "true" ? true : false)
+                      }
                       //className="form-check-input"
                     />
                     Admin
@@ -135,7 +135,9 @@ import "../styles/user.css";
                       name="status"
                       value={false}
                       checked={!isAdmin}
-                      onChange = {(e) => setIsAdmin(e.target.value === 'true' ? true : false)}
+                      onChange={(e) =>
+                        setIsAdmin(e.target.value === "true" ? true : false)
+                      }
                       //className="form-check-input"
                     />
                     Not Admin
@@ -144,11 +146,7 @@ import "../styles/user.css";
               </div>
               <div className="userUpdateRight">
                 <div className="userUpdateUpload">
-                  <img
-                    className="userUpdateImg"
-                    src={userIcon}
-                    alt=""
-                  />
+                  <img className="userUpdateImg" src={userIcon} alt="" />
                   <label htmlFor="file">
                     <Publish className="userUpdateIcon" />
                   </label>
@@ -160,5 +158,6 @@ import "../styles/user.css";
           </div>
         </div>
       </div>
-    );
-  }
+    </Helmet>
+  );
+}

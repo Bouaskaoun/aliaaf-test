@@ -14,7 +14,7 @@ const Footer = () => {
             <div className="col-lg-12">
               <div className="footer-col first">
                 <a href="index.html">
-                  <img class="logo-image" src={logo} alt="alternative" />
+                  <img className="logo-image" src={logo} alt="alternative" />
                 </a>
                 <p className="p-small">
                   Association des Lauréats Ingénieurs Agroalimentaires de la FST
@@ -24,12 +24,15 @@ const Footer = () => {
               <div className="footer-col second">
                 <h6>Contact</h6>
                 <ul className="list-unstyled li-space-lg p-small">
-                  {/* <li class="p-small">
-                    <i class="fas fa-phone-alt"></i>+80 90 90 90 123
+                  {/* <li className="p-small">
+                    <i className="fas fa-phone-alt"></i>+80 90 90 90 123
                   </li> */}
-                  <li class="p-small">
-                    <i class="fas fa-envelope"></i>
-                    <a class="noline" href="mailto:Aliaaf.contact@gmail.com">
+                  <li className="p-small">
+                    <i className="fas fa-envelope"></i>
+                    <a
+                      className="noline"
+                      href="mailto:Aliaaf.contact@gmail.com"
+                    >
                       Aliaaf.contact@gmail.com
                     </a>
                   </li>

@@ -1,13 +1,14 @@
 import "../styles/productList.css";
 import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { Edit, DeleteOutline } from "@material-ui/icons";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { publicRequest, userRequest } from "../requestMethods";
 import Helmet from "../components/Helmet/Helmet";
 
 export default function ProductList() {
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getProducts = async () => {
@@ -30,11 +31,10 @@ export default function ProductList() {
   };
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 200 },
     {
       field: "title",
       headerName: "Book Title",
-      width: 200,
+      width: 600,
       // renderCell: (params) => {
       //   return (
       //     <div className="productListItem">
@@ -51,20 +51,16 @@ export default function ProductList() {
       width: 120,
     },
     {
-      field: "pdf",
-      headerName: "Pdf",
-      width: 160,
-    },
-    {
       field: "action",
       headerName: "Action",
       width: 150,
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/product/" + params.row._id}>
-              <button className="productListEdit">Edit</button>
-            </Link>
+            <Edit
+              className="productListEdit"
+              onClick={() => navigate(`/product/${params.row._id}`)}
+            />
             <DeleteOutline
               className="productListDelete"
               onClick={() => handleDelete(params.row._id)}

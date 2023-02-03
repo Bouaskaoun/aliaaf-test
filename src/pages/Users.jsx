@@ -1,13 +1,14 @@
 import "../styles/users.css";
 import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { Edit, DeleteOutline } from "@material-ui/icons";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { userRequest } from "../requestMethods";
 import Helmet from "../components/Helmet/Helmet";
 
 export default function Users() {
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getUsers = async () => {
@@ -28,7 +29,6 @@ export default function Users() {
   };
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 200 },
     {
       field: "username",
       headerName: "User",
@@ -42,7 +42,7 @@ export default function Users() {
       //     );
       //   },
     },
-    { field: "email", headerName: "Email", width: 200 },
+    { field: "email", headerName: "Email", width: 400 },
     {
       field: "isAdmin",
       headerName: "Status",
@@ -55,9 +55,10 @@ export default function Users() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/user/" + params.row._id}>
-              <button className="userListEdit">Edit</button>
-            </Link>
+            <Edit
+              onClick={() => navigate(`/user/${params.row._id}`)}
+              className="userListEdit"
+            />
             <DeleteOutline
               className="userListDelete"
               onClick={() => handleDelete(params.row._id)}

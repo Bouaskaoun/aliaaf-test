@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { userRequest } from "../requestMethods";
 import missingFile from "../assets/images/missing-file.jpg";
 import "../styles/login.css";
+import ProgressCircle from "../components/UI/ProgressCircle";
 
 const AddProducts = () => {
   const [title, setTitle] = useState("");
@@ -18,6 +19,8 @@ const AddProducts = () => {
   const [desc, setDesc] = useState("");
   const [img, setImg] = useState(null);
   const [pdf, setPdf] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [progressBar, setProgressBar] = useState(0);
 
   // const addProduct = async(e) => {
   //   e.preventDefault()
@@ -56,6 +59,7 @@ const AddProducts = () => {
 
   const addProduct = async (e) => {
     e.preventDefault();
+    setLoading(true);
     let imgUrl = "";
     let pdfUrl = "";
     if (img == null) {
@@ -110,6 +114,7 @@ const AddProducts = () => {
       (snapshot) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setProgressBar(progress);
         console.log("Upload is " + progress + "% done");
         switch (snapshot.state) {
           case "paused":
@@ -149,6 +154,7 @@ const AddProducts = () => {
             pdf: pdfUrl,
           })
           .then(() => {
+            setLoading(false);
             setTitle("");
             setAuthor("");
             setDesc("");
@@ -281,6 +287,7 @@ const AddProducts = () => {
                     <select
                       className="form-control-input"
                       onChange={(e) => setCategory(e.target.value)}
+                      required
                     >
                       <option value="default">Select Category</option>
                       <option value="Textes_réglementaires">
@@ -328,6 +335,7 @@ const AddProducts = () => {
                       rows="5"
                       value={desc}
                       onChange={(e) => setDesc(e.target.value)}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -336,6 +344,7 @@ const AddProducts = () => {
                       type="file"
                       accept="image/png, image/jpeg"
                       onChange={(e) => setImg(e.target.files[0])}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -344,16 +353,29 @@ const AddProducts = () => {
                       type="file"
                       accept=".pdf"
                       onChange={(e) => setPdf(e.target.files[0])}
+                      required
                     />
                   </div>
-                  <div className="form-group">
-                    <button
-                      type="submit"
-                      className="form-control-submit-button"
-                    >
-                      Create
-                    </button>
-                  </div>
+                  {loading ? (
+                    <div className="d-flex justify-content-center">
+                      <ProgressCircle
+                        progress={
+                          Math.round((progressBar + Number.EPSILON) * 100) / 100
+                        }
+                        trackWidth={5}
+                        indicatorWidth={10}
+                      />
+                    </div>
+                  ) : (
+                    <div className="form-group">
+                      <button
+                        type="submit"
+                        className="form-control-submit-button"
+                      >
+                        Ajouter
+                      </button>
+                    </div>
+                  )}
                 </form>
               </div>
             </Col>

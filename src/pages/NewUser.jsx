@@ -163,7 +163,7 @@ export default function NewUser() {
                       type="submit"
                       className="form-control-submit-button"
                     >
-                      Create
+                      Ajouter
                     </button>
                   </div>
                 </form>

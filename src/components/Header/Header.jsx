@@ -56,7 +56,7 @@ const Header = () => {
               className="nav-item"
               onClick={() => {
                 const anchor = document.querySelector("#header");
-                anchor.scrollIntoView({
+                anchor?.scrollIntoView({
                   behavior: "smooth",
                   block: "center",
                 });
@@ -86,7 +86,7 @@ const Header = () => {
                 className="nav-item"
                 onClick={() => {
                   const anchor = document.querySelector("#services");
-                  anchor.scrollIntoView({
+                  anchor?.scrollIntoView({
                     behavior: "smooth",
                     block: "center",
                   });

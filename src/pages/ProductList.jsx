@@ -33,7 +33,7 @@ export default function ProductList() {
   const columns = [
     {
       field: "title",
-      headerName: "Book Title",
+      headerName: "Titre du Document",
       width: 600,
       // renderCell: (params) => {
       //   return (
@@ -44,10 +44,10 @@ export default function ProductList() {
       //   );
       // },
     },
-    { field: "category", headerName: "Category", width: 200 },
+    { field: "category", headerName: "Catégorie", width: 200 },
     {
       field: "author",
-      headerName: "Author",
+      headerName: "Auteur",
       width: 120,
     },
     {

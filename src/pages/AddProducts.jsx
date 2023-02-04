@@ -339,7 +339,7 @@ const AddProducts = () => {
                     />
                   </div>
                   <div className="form-group">
-                    <label>Image</label>
+                    <label className="m-3">Image</label>
                     <input
                       type="file"
                       accept="image/png, image/jpeg"
@@ -348,7 +348,7 @@ const AddProducts = () => {
                     />
                   </div>
                   <div className="form-group">
-                    <label>Pdf</label>
+                    <label className="m-3">Pdf</label>
                     <input
                       type="file"
                       accept=".pdf"

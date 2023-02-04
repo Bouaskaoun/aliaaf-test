@@ -52,9 +52,9 @@ export default function User() {
     <Helmet title="User">
       <div className="user">
         <div className="userTitleContainer">
-          <h1 className="userTitle">Edit User</h1>
+          <h1 className="userTitle">Modifier l'utilisateur</h1>
           <Link to="/newUser">
-            <button className="userAddButton">Create</button>
+            <button className="userAddButton">Ajouter</button>
           </Link>
         </div>
         <div className="userContainer">
@@ -69,7 +69,7 @@ export default function User() {
               </div>
             </div>
             <div className="userShowBottom">
-              <span className="userShowTitle">Account Details</span>
+              <span className="userShowTitle">Détails du Compte</span>
               <div className="userShowInfo">
                 <PermIdentity className="userShowIcon" />
                 <span className="userShowInfoTitle">{username}</span>
@@ -81,7 +81,7 @@ export default function User() {
             </div>
           </div>
           <div className="userUpdate">
-            <span className="userUpdateTitle">Edit</span>
+            <span className="userUpdateTitle">Modifier</span>
             <form className="userUpdateForm" onSubmit={handleUpdate}>
               <div className="userUpdateLeft">
                 <div className="userUpdateItem">

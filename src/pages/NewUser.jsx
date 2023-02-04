@@ -124,7 +124,7 @@ export default function NewUser() {
                     <input
                       type="password"
                       className="form-control-input"
-                      placeholder="Enter your password"
+                      placeholder="Password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required

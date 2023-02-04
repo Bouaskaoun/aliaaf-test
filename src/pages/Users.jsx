@@ -31,7 +31,7 @@ export default function Users() {
   const columns = [
     {
       field: "username",
-      headerName: "User",
+      headerName: "Utilisateur",
       width: 200,
       //   renderCell: (params) => {
       //     return (

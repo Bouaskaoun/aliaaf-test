@@ -35,7 +35,7 @@ const ProductCard = ({ item }) => {
           <img src={item.img} alt="" />
         </div>
         <div className="card-body">
-          <h3 className="card-title">{item.category}</h3>
+          <h3 className="card-title">{item.category.replace(/_/g, " ")}</h3>
           <p>{item.title}</p>
           <button
             className="btn-solid-lg"

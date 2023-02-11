@@ -72,7 +72,8 @@ const ProductDetails = () => {
                     <h2>{product?.author}</h2>
                     <div className="product__rating d-flex align-items-center gap-5 mb-3">
                       <p>
-                        Category: <span>{product?.category}</span>
+                        Category:{" "}
+                        <span>{product?.category.replace(/_/g, " ")}</span>
                       </p>
                     </div>
                     {/* <div className="d-flex align-items-center gap-5">

@@ -12,6 +12,10 @@ const Shop = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const getProducts = async () => {
       try {
         const res = await publicRequest.get("products");

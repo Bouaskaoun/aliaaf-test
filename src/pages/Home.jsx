@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../styles/home.css";
 import unsplashImage from "../assets/images/unsplash-1.png";
 import aliaafLogo from "../assets/images/ALIAAF LOGO.PNG";
@@ -6,6 +6,10 @@ import detailImage from "../assets/images/details-1.png";
 import { NavLink } from "react-router-dom";
 
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <header id="header" className="header">

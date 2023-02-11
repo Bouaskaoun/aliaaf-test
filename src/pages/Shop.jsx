@@ -105,7 +105,10 @@ const Shop = () => {
                   <div className="col-lg-12">
                     <div className="filter">
                       <div className="filter-icon bg-4">
-                        <i className="fas fa-dot-circle"></i>
+                        <i
+                          className="fas fa-dot-circle"
+                          onClick={() => handleFilter("reset")}
+                        ></i>
                       </div>
                       <div className="filter-body">
                         <h5
@@ -119,7 +122,10 @@ const Shop = () => {
 
                     <div className="filter">
                       <div className="filter-icon bg-1">
-                        <i className="fas fa-gavel"></i>
+                        <i
+                          className="fas fa-gavel"
+                          onClick={() => handleFilter("Textes_réglementaires")}
+                        ></i>
                       </div>
                       <div className="filter-body">
                         <h5
@@ -133,7 +139,10 @@ const Shop = () => {
 
                     <div className="filter">
                       <div className="filter-icon bg-2">
-                        <i className="fas fa-graduation-cap"></i>
+                        <i
+                          className="fas fa-graduation-cap"
+                          onClick={() => handleFilter("PFE")}
+                        ></i>
                       </div>
                       <div className="filter-body">
                         <h5
@@ -147,7 +156,12 @@ const Shop = () => {
 
                     <div className="filter">
                       <div className="filter-icon bg-3">
-                        <i className="fas fa-gear"></i>
+                        <i
+                          className="fas fa-gear"
+                          onClick={() =>
+                            handleFilter("Management_de_la_Production")
+                          }
+                        ></i>
                       </div>
                       <div className="filter-body">
                         <h5
@@ -163,7 +177,10 @@ const Shop = () => {
 
                     <div className="filter">
                       <div className="filter-icon bg-4">
-                        <i className="fas fa-newspaper"></i>
+                        <i
+                          className="fas fa-newspaper"
+                          onClick={() => handleFilter("Articles_scientifiques")}
+                        ></i>
                       </div>
                       <div className="filter-body">
                         <h5
@@ -177,7 +194,10 @@ const Shop = () => {
 
                     <div className="filter">
                       <div className="filter-icon bg-5">
-                        <i className="fas fa-check"></i>
+                        <i
+                          className="fas fa-check"
+                          onClick={() => handleFilter("Normes_marocaines")}
+                        ></i>
                       </div>
                       <div className="filter-body">
                         <h5
@@ -191,7 +211,12 @@ const Shop = () => {
 
                     <div className="filter">
                       <div className="filter-icon bg-1">
-                        <i className="fas fa-cogs"></i>
+                        <i
+                          className="fas fa-cogs"
+                          onClick={() =>
+                            handleFilter("Insertion_professionnells")
+                          }
+                        ></i>
                       </div>
                       <div className="filter-body">
                         <h5
@@ -207,7 +232,12 @@ const Shop = () => {
 
                     <div className="filter">
                       <div className="filter-icon bg-2">
-                        <i className="fas fa-clipboard"></i>
+                        <i
+                          className="fas fa-clipboard"
+                          onClick={() =>
+                            handleFilter("Anciens_concours_de_l'Etat")
+                          }
+                        ></i>
                       </div>
                       <div className="filter-body">
                         <h5
@@ -223,7 +253,10 @@ const Shop = () => {
 
                     <div className="filter">
                       <div className="filter-icon bg-3">
-                        <i className="fas fa-file-medical"></i>
+                        <i
+                          className="fas fa-file-medical"
+                          onClick={() => handleFilter("QHSE")}
+                        ></i>
                       </div>
                       <div className="filter-body">
                         <h5
@@ -237,7 +270,10 @@ const Shop = () => {
 
                     <div className="filter">
                       <div className="filter-icon bg-4">
-                        <i className="fas fa-folder"></i>
+                        <i
+                          className="fas fa-folder"
+                          onClick={() => handleFilter("Normes_et_référentiels")}
+                        ></i>
                       </div>
                       <div className="filter-body">
                         <h5
@@ -251,7 +287,10 @@ const Shop = () => {
 
                     <div className="filter">
                       <div className="filter-icon bg-5">
-                        <i className="fas fa-list-check"></i>
+                        <i
+                          className="fas fa-list-check"
+                          onClick={() => handleFilter("Gestion_de_projet")}
+                        ></i>
                       </div>
                       <div className="filter-body">
                         <h5
@@ -265,7 +304,12 @@ const Shop = () => {
 
                     <div className="filter">
                       <div className="filter-icon bg-1">
-                        <i className="fas fa-industry"></i>
+                        <i
+                          className="fas fa-industry"
+                          onClick={() =>
+                            handleFilter("Procédés_de_fabrication")
+                          }
+                        ></i>
                       </div>
                       <div className="filter-body">
                         <h5
@@ -281,7 +325,10 @@ const Shop = () => {
 
                     <div className="filter">
                       <div className="filter-icon bg-2">
-                        <i className="fas fa-cogs"></i>
+                        <i
+                          className="fas fa-cogs"
+                          onClick={() => handleFilter("MSDA")}
+                        ></i>
                       </div>
                       <div className="filter-body">
                         <h5
@@ -295,7 +342,10 @@ const Shop = () => {
 
                     <div className="filter">
                       <div className="filter-icon bg-3">
-                        <i className="fas fa-thumbs-up"></i>
+                        <i
+                          className="fas fa-thumbs-up"
+                          onClick={() => handleFilter("GBPF")}
+                        ></i>
                       </div>
                       <div className="filter-body">
                         <h5
@@ -317,7 +367,9 @@ const Shop = () => {
         <Container>
           <Row>
             {productsData.length === 0 ? (
-              <h1 className="text-center fs-4">No books are found</h1>
+              <h1 className="text-center fs-4">
+                Aucun document n'a été trouvé
+              </h1>
             ) : (
               <ProductsList data={productsData} />
             )}

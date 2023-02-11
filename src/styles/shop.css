@@ -123,6 +123,10 @@ img {
 	padding: 0;
 }
 
+.filters .filter-icon i {
+    cursor: pointer;
+}
+
 
 .bg-1 {
 	background-color: #fac702;

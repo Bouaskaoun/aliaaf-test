@@ -119,13 +119,15 @@ const Shop = () => {
 
                     <div className="filter">
                       <div className="filter-icon bg-1">
-                        <i
-                          className="fas fa-gavel"
-                          onClick={() => handleFilter("Textes_réglementaires")}
-                        ></i>
+                        <i className="fas fa-gavel"></i>
                       </div>
                       <div className="filter-body">
-                        <h5 className="filter-title">Textes réglementaires</h5>
+                        <h5
+                          className="filter-title"
+                          onClick={() => handleFilter("Textes_réglementaires")}
+                        >
+                          Textes réglementaires
+                        </h5>
                       </div>
                     </div>
 

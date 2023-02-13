@@ -67,6 +67,7 @@ const Header = () => {
                   navClass.isActive ? "nav-link active" : "nav-link"
                 }
                 to="home"
+                onClick={toggleNavbar}
               >
                 Home
               </NavLink>
@@ -77,6 +78,7 @@ const Header = () => {
                   navClass.isActive ? "nav-link active" : "nav-link"
                 }
                 to="books"
+                onClick={toggleNavbar}
               >
                 Bibliothèque
               </NavLink>
@@ -99,6 +101,7 @@ const Header = () => {
                       : "nav-link"
                   }
                   to="home#services"
+                  onClick={toggleNavbar}
                 >
                   Services
                 </NavLink>
@@ -122,6 +125,7 @@ const Header = () => {
                       : "nav-link"
                   }
                   to="home#details"
+                  onClick={toggleNavbar}
                 >
                   Ce Que Nous Faisons
                 </NavLink>
@@ -145,6 +149,7 @@ const Header = () => {
                       : "nav-link"
                   }
                   to="home#details-1"
+                  onClick={toggleNavbar}
                 >
                   A Propos De Nous
                 </NavLink>
@@ -157,6 +162,7 @@ const Header = () => {
                     navClass.isActive ? "nav-link active" : "nav-link"
                   }
                   to="booksList"
+                  onClick={toggleNavbar}
                 >
                   Gérer la bibliothèque
                 </NavLink>
@@ -169,6 +175,7 @@ const Header = () => {
                     navClass.isActive ? "nav-link active" : "nav-link"
                   }
                   to="users"
+                  onClick={toggleNavbar}
                 >
                   Gérer les utilisateurs
                 </NavLink>

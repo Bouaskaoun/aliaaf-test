@@ -11,7 +11,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -34,7 +34,9 @@ const Login = () => {
           <Row>
             {loading ? (
               <Col lg="12" className="text-center">
-                <h5 className="fw-bold">Loading...</h5>
+                <div style={{ marginBottom: "6rem" }}>
+                  <h5 className="fw-bold">Loading...</h5>
+                </div>
               </Col>
             ) : (
               <Col lg="6" className="m-auto text-center">

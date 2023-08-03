@@ -360,6 +360,23 @@ const Shop = () => {
                         </h5>
                       </div>
                     </div>
+
+                    <div className="filter">
+                      <div className="filter-icon bg-4">
+                        <i
+                          className="fas fa-book"
+                          onClick={() => handleFilter("Support_de_formations")}
+                        ></i>
+                      </div>
+                      <div className="filter-body">
+                        <h5
+                          className="filter-title"
+                          onClick={() => handleFilter("Support_de_formations")}
+                        >
+                          Support de formations
+                        </h5>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

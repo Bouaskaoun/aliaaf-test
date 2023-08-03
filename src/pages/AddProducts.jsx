@@ -324,6 +324,9 @@ const AddProducts = () => {
                       </option>
                       <option value="MSDA">MSDA</option>
                       <option value="GBPF">GBPF</option>
+                      <option value="Support_de_formations">
+                        Support de formations
+                      </option>
                     </select>
                   </div>
                   <div className="form-group">

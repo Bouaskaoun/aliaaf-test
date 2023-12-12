@@ -40,7 +40,7 @@
 }
 
 .newUserItem > input[type="text"], input[type="password"], input[type="email"] {
-    border: 1px solid gray;
+    /*border: 1px solid gray;*/
     border-radius: 5px;
 }
 
